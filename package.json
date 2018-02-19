@@ -11,6 +11,7 @@
     "draft-js-import-html": "^1.2.1",
     "meteor-node-stubs": "^0.3.2",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-mounter": "^1.2.0"
   }
 }

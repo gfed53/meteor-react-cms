@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-export const App = () => (
+export const App = ({content}) => (
   <div id="main-container">
   	<header>
-  		Hi
+  		Nav would probably go here
   	</header>
-    Content will go here
+    {content}
   </div>
 );
