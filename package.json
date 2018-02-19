@@ -6,6 +6,9 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "draft-js": "^0.10.5",
+    "draft-js-export-html": "^1.2.0",
+    "draft-js-import-html": "^1.2.1",
     "meteor-node-stubs": "^0.3.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
