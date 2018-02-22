@@ -63,8 +63,6 @@ export default class MyEditor extends Component {
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.onChange}
         />
-        <h3>HTML output</h3>
-        <Text data={this.state.editorState} />
       </div>
     );
   }

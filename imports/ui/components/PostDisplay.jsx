@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-export const PostDisplay = () => (
+export const PostDisplay = (props) => (
   <div>
-    Display of Post Here
+    {props.data}
   </div>
 );

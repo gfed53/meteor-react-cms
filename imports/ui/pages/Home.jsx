@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { Posts } from '../components/Posts.jsx';
+import PostCreate from '../components/PostCreate.jsx';
 
  
 export default class Home extends Component {
@@ -12,9 +13,18 @@ export default class Home extends Component {
     this.state = {
       // Mock data for now
       posts: [
-        'post 1',
-        'post 2',
-        'post 3'
+        {
+          id: 1,
+          content: 'post 1'
+        },
+        {
+          id: 2,
+          content: 'post 2'
+        },
+        {
+          id: 3,
+          content: 'post 3'
+        }
       ]
     }
 
@@ -42,6 +52,8 @@ export default class Home extends Component {
       <div>
         This is the homepage.
         <Posts posts={this.state.posts} />
+
+        <PostCreate />
       </div>
     );
   }
