@@ -15,15 +15,24 @@ export default class Home extends Component {
       posts: [
         {
           id: 1,
-          content: 'post 1'
+          author: 'Anon',
+          date_posted: new Date('2018-01-01'),
+          date_last_edited: null,
+          draft_content: {}
         },
         {
           id: 2,
-          content: 'post 2'
+          author: 'Anon',
+          date_posted: new Date('2018-01-02'),
+          date_last_edited: null,
+          draft_content: {}
         },
         {
           id: 3,
-          content: 'post 3'
+          author: 'Anon',
+          date_posted: new Date('2018-02-01'),
+          date_last_edited: null,
+          draft_content: {}
         }
       ]
     }

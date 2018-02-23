@@ -15,8 +15,9 @@ export default class Post extends Component {
   render() {
     return (
       <div>
-        Individual Post Here
-        <PostDisplay data={this.props.data} />
+        <p>By {this.props.data.author}</p>
+        <p>Originally Posted: {this.props.data.date_posted.toLocaleString()}</p>
+        <PostDisplay data={this.props.data.draft_content} />
       </div>
     );
   }
