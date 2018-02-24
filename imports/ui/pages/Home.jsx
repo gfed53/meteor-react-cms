@@ -37,6 +37,8 @@ export default class Home extends Component {
       ]
     }
 
+    this.handleSave = this.handleSave.bind(this);
+
   }
 
   componentDidMount(){
@@ -56,13 +58,24 @@ export default class Home extends Component {
   renderData(){
   }
 
+  handleSave(post){
+    const updatedPosts = [...this.state.posts];
+    let _id = updatedPosts.length+1,
+        _date
+    updatedPosts.push(post);
+    this.setState({
+      posts: updatedPosts
+    });
+    console.log('this.state.posts',this.state.posts);
+  }
+
   render() {
     return (
       <div>
         This is the homepage.
         <Posts posts={this.state.posts} />
 
-        <PostCreate />
+        <PostCreate onSave={this.handleSave} />
       </div>
     );
   }
