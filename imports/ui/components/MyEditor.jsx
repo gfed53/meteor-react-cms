@@ -37,7 +37,7 @@ export default class MyEditor extends Component {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     
     if (newState) {
-      this.onChange(newState);
+      this.handleChange(newState);
       return 'handled';
     }
     return 'not-handled';
@@ -48,11 +48,11 @@ export default class MyEditor extends Component {
     this.logState(newState);
 
     if(newState) {
-      this.onChange(newState);
+      this.handleChange(newState);
       return 'handled';
     }
     return 'not-handled';
-    // this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD'));
+    // this.handleChange(RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD'));
   }
 
   _onTestClick() {

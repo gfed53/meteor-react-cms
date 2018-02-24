@@ -21,7 +21,7 @@ export default class PostCreate extends Component {
       draft_content: draftContent
     }
 
-    console.log('post in postCreate',post);
+    // console.log('post in postCreate',post);
 
     this.props.onSave(post);
   }

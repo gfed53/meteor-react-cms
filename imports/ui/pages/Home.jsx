@@ -13,27 +13,13 @@ export default class Home extends Component {
     this.state = {
       // Mock data for now
       posts: [
-        {
-          id: 1,
-          author: 'Anon',
-          date_posted: new Date('2018-01-01'),
-          date_last_edited: null,
-          draft_content: {}
-        },
-        {
-          id: 2,
-          author: 'Anon',
-          date_posted: new Date('2018-01-02'),
-          date_last_edited: null,
-          draft_content: {}
-        },
-        {
-          id: 3,
-          author: 'Anon',
-          date_posted: new Date('2018-02-01'),
-          date_last_edited: null,
-          draft_content: {}
-        }
+        // {
+        //   id: 1,
+        //   author: 'Anon',
+        //   date_posted: new Date('2018-01-01'),
+        //   date_last_edited: null,
+        //   draft_content: {}
+        // }
       ]
     }
 
@@ -46,6 +32,12 @@ export default class Home extends Component {
 
   componentWillUpdate(){
     console.log('componentWillUpdate');
+    
+  }
+
+  componentDidUpdate(){
+    console.log('componentDidUpdate');
+    console.log('this.state.posts',this.state.posts);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -61,7 +53,7 @@ export default class Home extends Component {
   handleSave(post){
     const updatedPosts = [...this.state.posts];
     post.id = updatedPosts.length+1;
-    console.log('post in Home',post);
+    // console.log('post in Home',post);
     updatedPosts.push(post);
     this.setState({
       posts: updatedPosts
