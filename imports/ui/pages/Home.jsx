@@ -60,13 +60,17 @@ export default class Home extends Component {
 
   handleSave(post){
     const updatedPosts = [...this.state.posts];
-    let _id = updatedPosts.length+1,
-        _date
+    post.id = updatedPosts.length+1;
+    console.log('post in Home',post);
     updatedPosts.push(post);
     this.setState({
       posts: updatedPosts
     });
-    console.log('this.state.posts',this.state.posts);
+
+    // setTimeout(() => {
+    //   console.log('this.state.posts',this.state.posts);
+    // }, 0);
+    
   }
 
   render() {
