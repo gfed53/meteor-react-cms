@@ -30,7 +30,7 @@ export default class PostCreate extends Component {
   render() {
     return (
       <div>
-        Create New Post
+        Create A New Post!
         <MyEditor onSave={this.handleSave} />
       </div>
     );

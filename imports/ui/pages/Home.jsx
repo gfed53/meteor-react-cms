@@ -68,7 +68,7 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        This is the homepage.
+        {/* This is the homepage. */}
         <Posts posts={this.state.posts} />
 
         <PostCreate onSave={this.handleSave} />
