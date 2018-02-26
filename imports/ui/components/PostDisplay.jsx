@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
 
 export const PostDisplay = (props) => (
-  <div dangerouslySetInnerHTML={{__html: props.data}}></div>
+  <div class="post-display-main" dangerouslySetInnerHTML={{__html: props.data}}></div>
 );

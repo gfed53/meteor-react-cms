@@ -47,9 +47,12 @@ export default class Post extends Component {
     }
 
     return (
-      <div>
-        <p>By {this.props.data.author}</p>
-        <p>Originally Posted: {this.props.data.date_posted.toLocaleString()}</p>
+      <div className="post-main">
+        <div className="post-meta right">
+          <p>By {this.props.data.author}</p>
+          <p>Originally Posted: {this.props.data.date_posted.toLocaleString()}</p>
+        </div>
+        
         <PostDisplay data={this.getDraftHtml(this.props.data.draft_content)} />
         {postEdit}
         {button}
