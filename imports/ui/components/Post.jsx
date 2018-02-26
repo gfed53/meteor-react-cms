@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { convertFromRaw } from 'draft-js';
+import { stateToHTML } from 'draft-js-export-html';
 
 import MyEditor from './MyEditor.jsx';
 import PostEdit from './PostEdit.jsx';
@@ -22,6 +24,15 @@ export default class Post extends Component {
     });
   }
 
+  getDraftHtml(raw){
+    const content = convertFromRaw(raw);
+    const options = {
+      defaultBlockTag: 'div',
+    };
+
+    return stateToHTML(content, options);
+  }
+
 
 
 
@@ -39,7 +50,7 @@ export default class Post extends Component {
       <div>
         <p>By {this.props.data.author}</p>
         <p>Originally Posted: {this.props.data.date_posted.toLocaleString()}</p>
-        <PostDisplay data={this.props.data.draft_content} />
+        <PostDisplay data={this.getDraftHtml(this.props.data.draft_content)} />
         {postEdit}
         {button}
       </div>
