@@ -76,8 +76,10 @@ export default class MyEditor extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this._onBoldClick}>Bold</button>
+      <div className="my-editor-main">
+        <div className="right controls-style">
+          <button onClick={this._onBoldClick}>Bold</button>
+        </div>
         {/* <button onClick={this._onTestClick.bind(this)}>Test</button> */}
         {/* <button onClick={this.logState}>Log State</button> */}
         <Editor 
@@ -85,8 +87,10 @@ export default class MyEditor extends Component {
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.handleChange}
         />
-        <button onClick={this.handleSave}>Save</button>
-        <button>Cancel</button>
+        <div className="controls-main">
+          <button onClick={this.handleSave}>Save</button>
+          <button>Cancel</button>
+        </div>
       </div>
     );
   }
