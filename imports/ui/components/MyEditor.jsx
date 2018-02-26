@@ -65,6 +65,11 @@ export default class MyEditor extends Component {
     const raw = convertToRaw(content);
 
     this.props.onSave(raw);
+
+    //Clear editorState afterwards (is there a better way?)
+    this.setState({
+      editorState: EditorState.createEmpty()
+    });
   }
 
 
