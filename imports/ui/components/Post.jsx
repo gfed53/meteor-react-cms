@@ -43,7 +43,9 @@ export default class Post extends Component {
     if(this.state.isEditing){
       postEdit = <PostEdit draft_content={this.props.data.draft_content} />;
     } else {
-      button = <button onClick={this.onEdit}>Edit</button>;
+      button = (<div className="post-button-edit-container">
+                  <button className="my-button" onClick={this.onEdit}>Edit</button>
+                </div>);
     }
 
     return (
@@ -56,6 +58,7 @@ export default class Post extends Component {
         <PostDisplay data={this.getDraftHtml(this.props.data.draft_content)} />
         {postEdit}
         {button}
+        
       </div>
     );
   }

@@ -78,7 +78,7 @@ export default class MyEditor extends Component {
     return (
       <div className="my-editor-main">
         <div className="right controls-style">
-          <button onClick={this._onBoldClick}>Bold</button>
+          <button className="my-button" onClick={this._onBoldClick}>Bold</button>
         </div>
         {/* <button onClick={this._onTestClick.bind(this)}>Test</button> */}
         {/* <button onClick={this.logState}>Log State</button> */}
@@ -88,8 +88,8 @@ export default class MyEditor extends Component {
           onChange={this.handleChange}
         />
         <div className="controls-main">
-          <button onClick={this.handleSave}>Save</button>
-          <button>Cancel</button>
+          <button className="my-button" onClick={this.handleSave}>Save</button>
+          <button className="my-button">Cancel</button>
         </div>
       </div>
     );
