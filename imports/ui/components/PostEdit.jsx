@@ -21,6 +21,8 @@ export default class PostEdit extends Component {
 
     console.log('postUpdates',postUpdates);
     console.log('this.props.post_id',this.props.post_id);
+
+    this.props.onSave(this.props.post_id,postUpdates);
     
   }
 

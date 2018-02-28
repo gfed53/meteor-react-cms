@@ -24,6 +24,7 @@ export default class Home extends Component {
     }
 
     this.handleNewPost = this.handleNewPost.bind(this);
+    this.handleEditedPost = this.handleEditedPost.bind(this);
 
   }
 
@@ -31,13 +32,13 @@ export default class Home extends Component {
   }
 
   componentWillUpdate(){
-    console.log('componentWillUpdate');
+    // console.log('componentWillUpdate');
     
   }
 
   componentDidUpdate(){
-    console.log('componentDidUpdate');
-    console.log('this.state.posts',this.state.posts);
+    // console.log('componentDidUpdate');
+    // console.log('this.state.posts',this.state.posts);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -65,7 +66,30 @@ export default class Home extends Component {
     
   }
 
-  handleEditedPost(post, updates){
+  handleEditedPost(post_id, updates){
+    // console.log('handleEditedPost');
+    // console.log('post_id',post_id);
+    // console.log('updates',updates);
+    const updatedPosts = [...this.state.posts];
+
+    let post = updatedPosts[post_id-1];
+    // console.log('post',post);
+
+    // Now we should have a reference to our existing post.
+
+    let updatedPost = Object.assign(post, updates);
+
+    console.log('updatedPost',updatedPost);
+
+    updatedPosts[post_id-1] = updatedPost;
+
+    this.setState({
+      posts: updatedPosts
+    });
+
+    console.log('this.state.posts',this.state.posts);
+
+
 
   }
 
@@ -75,7 +99,7 @@ export default class Home extends Component {
         {/* This is the homepage. */}
         
         <PostCreate onSave={this.handleNewPost} />
-        <Posts posts={this.state.posts} />
+        <Posts onSave={this.handleEditedPost} posts={this.state.posts} />
       </div>
     );
   }
