@@ -54,7 +54,7 @@ export default class Home extends Component {
     const updatedPosts = [...this.state.posts];
     post.id = updatedPosts.length+1;
     // console.log('post in Home',post);
-    updatedPosts.push(post);
+    updatedPosts.unshift(post);
     this.setState({
       posts: updatedPosts
     });
@@ -69,9 +69,9 @@ export default class Home extends Component {
     return (
       <div>
         {/* This is the homepage. */}
-        <Posts posts={this.state.posts} />
-
+        
         <PostCreate onSave={this.handleSave} />
+        <Posts posts={this.state.posts} />
       </div>
     );
   }
