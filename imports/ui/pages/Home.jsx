@@ -23,7 +23,7 @@ export default class Home extends Component {
       ]
     }
 
-    this.handleSave = this.handleSave.bind(this);
+    this.handleNewPost = this.handleNewPost.bind(this);
 
   }
 
@@ -50,7 +50,7 @@ export default class Home extends Component {
   renderData(){
   }
 
-  handleSave(post){
+  handleNewPost(post){
     const updatedPosts = [...this.state.posts];
     post.id = updatedPosts.length+1;
     // console.log('post in Home',post);
@@ -65,12 +65,16 @@ export default class Home extends Component {
     
   }
 
+  handleEditedPost(post, updates){
+
+  }
+
   render() {
     return (
       <div>
         {/* This is the homepage. */}
         
-        <PostCreate onSave={this.handleSave} />
+        <PostCreate onSave={this.handleNewPost} />
         <Posts posts={this.state.posts} />
       </div>
     );

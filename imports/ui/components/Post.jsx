@@ -42,7 +42,7 @@ export default class Post extends Component {
     const content = null;
 
     if(this.state.isEditing){
-      content = <PostEdit draft_content={this.props.data.draft_content} />;
+      content = <PostEdit post_id={this.props.data.id} draft_content={this.props.data.draft_content} />;
     } else {
       content = (
         <div>

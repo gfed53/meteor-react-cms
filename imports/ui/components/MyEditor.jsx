@@ -98,6 +98,22 @@ export default class MyEditor extends Component {
 
 
   render() {
+    const controls = null;
+
+    if(this.props.draft_content){
+      controls = (
+        <div className="controls-main">
+          <button className="my-button" onClick={this.handleSave}>Save</button>
+          <button className="my-button">Cancel</button>
+        </div>
+      );
+    } else {
+      controls = (
+        <div className="controls-main">
+          <button className="my-button" onClick={this.handleSave}>Create</button>
+        </div>
+      )
+    }
     return (
       <div className="my-editor-main">
         <div className="right controls-style">
@@ -110,10 +126,11 @@ export default class MyEditor extends Component {
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.handleChange}
         />
-        <div className="controls-main">
+        {controls}
+        {/* <div className="controls-main">
           <button className="my-button" onClick={this.handleSave}>Save</button>
           <button className="my-button">Cancel</button>
-        </div>
+        </div> */}
       </div>
     );
   }
