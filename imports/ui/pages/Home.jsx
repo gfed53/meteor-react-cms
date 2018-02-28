@@ -71,23 +71,27 @@ export default class Home extends Component {
     // console.log('post_id',post_id);
     // console.log('updates',updates);
     const updatedPosts = [...this.state.posts];
+    // console.log('updatedPosts',updatedPosts);
 
-    let post = updatedPosts[post_id-1];
+    // let post = updatedPosts[post_id-1];
+    let postIndex = updatedPosts.findIndex((item) => item.id === post_id);
+    // console.log('postIndex',postIndex);
+    let post = updatedPosts[postIndex];
     // console.log('post',post);
 
     // Now we should have a reference to our existing post.
 
     let updatedPost = Object.assign(post, updates);
 
-    console.log('updatedPost',updatedPost);
+    // console.log('updatedPost',updatedPost);
 
-    updatedPosts[post_id-1] = updatedPost;
+    updatedPosts[postIndex] = updatedPost;
 
     this.setState({
       posts: updatedPosts
     });
 
-    console.log('this.state.posts',this.state.posts);
+    
 
 
 

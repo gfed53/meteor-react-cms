@@ -35,11 +35,11 @@ export default class MyEditor extends Component {
 
   componentDidMount(){
     if(this.props.draft_content){
-      console.log('draft_content',this.props.draft_content);
+      // console.log('draft_content',this.props.draft_content);
       const content = convertFromRaw(this.props.draft_content);
-      console.log('content',content);
+      // console.log('content',content);
       const existing_state = EditorState.createWithContent(content);
-      console.log('existing_state',existing_state);
+      // console.log('existing_state',existing_state);
 
       this.setState({
         editorState: EditorState.createWithContent(content)

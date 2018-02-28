@@ -12,17 +12,19 @@ export default class PostEdit extends Component {
   }
 
   handleSave(draft_content){
-    console.log('draft_content',draft_content);
+    // console.log('draft_content',draft_content);
     // Merge these properties with existing post in posts collection
     const postUpdates = {
       date_last_edited: new Date(),
       draft_content
     };
 
-    console.log('postUpdates',postUpdates);
-    console.log('this.props.post_id',this.props.post_id);
+    // console.log('postUpdates',postUpdates);
+    // console.log('this.props.post_id',this.props.post_id);
 
     this.props.onSave(this.props.post_id,postUpdates);
+
+    this.props.onClose();
     
   }
 
