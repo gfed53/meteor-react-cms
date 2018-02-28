@@ -39,13 +39,22 @@ export default class Post extends Component {
   render() {
     const button = null;
     const postEdit = null;
+    const content = null;
 
     if(this.state.isEditing){
-      postEdit = <PostEdit draft_content={this.props.data.draft_content} />;
+      content = <PostEdit draft_content={this.props.data.draft_content} />;
     } else {
-      button = (<div className="post-button-edit-container">
-                  <button className="my-button" onClick={this.onEdit}>Edit</button>
-                </div>);
+      content = (
+        <div>
+          <PostDisplay data={this.getDraftHtml(this.props.data.draft_content)} />
+          <div className="post-button-edit-container">
+            <button className="my-button" onClick={this.onEdit}>Edit</button>
+          </div>
+        </div>
+      );
+      // button = (<div className="post-button-edit-container">
+      //             <button className="my-button" onClick={this.onEdit}>Edit</button>
+      //           </div>);
     }
 
     return (
@@ -54,10 +63,12 @@ export default class Post extends Component {
           <p>By {this.props.data.author}</p>
           <p>Originally Posted: {this.props.data.date_posted.toLocaleString()}</p>
         </div>
+
+        {content}
         
-        <PostDisplay data={this.getDraftHtml(this.props.data.draft_content)} />
+        {/* <PostDisplay data={this.getDraftHtml(this.props.data.draft_content)} />
         {postEdit}
-        {button}
+        {button} */}
         
       </div>
     );

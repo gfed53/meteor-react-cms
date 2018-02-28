@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
+import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
 
 
 export default class MyEditor extends Component {
@@ -31,6 +31,29 @@ export default class MyEditor extends Component {
     this._onBoldClick = this._onBoldClick.bind(this);
     this.handleSave = this.handleSave.bind(this);
 
+  }
+
+  componentDidMount(){
+    if(this.props.draft_content){
+      console.log('draft_content',this.props.draft_content);
+      const content = convertFromRaw(this.props.draft_content);
+      console.log('content',content);
+      const existing_state = EditorState.createWithContent(content);
+      console.log('existing_state',existing_state);
+
+      this.setState({
+        editorState: EditorState.createWithContent(content)
+      });
+
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    // console.log('running?');
+    // if(nextProps.draft_content){
+    //   const content = convertFromRaw(draft_content);
+    //   console.log('content',content);
+    // }
   }
 
   handleKeyCommand(command, editorState) {

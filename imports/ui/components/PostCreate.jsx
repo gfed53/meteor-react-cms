@@ -11,6 +11,7 @@ export default class PostCreate extends Component {
     this.handleSave = this.handleSave.bind(this);
   }
 
+  // For saving a new post
   handleSave(draftContent){
     console.log('draftContent',draftContent);
     const post = {
