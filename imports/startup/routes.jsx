@@ -15,3 +15,9 @@ FlowRouter.route('/home', {
   }
 });
 
+FlowRouter.notFound = {
+	action: function(){
+		FlowRouter.go('/home');
+	}
+}
+
