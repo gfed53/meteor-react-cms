@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
 
 import { InlineStyleControls } from './InlineStyleControls.jsx';
+import { BlockStyleControls } from './BlockStyleControls.jsx';
 
 
 export default class MyEditor extends Component {
@@ -29,9 +30,11 @@ export default class MyEditor extends Component {
       // console.log('logState',convertToRaw(content));
     };
 
-    this.handleKeyCommand = this.handleKeyCommand.bind(this);
+    this.handleKeyCommand = this._handleKeyCommand.bind(this);
     this.onBoldClick = this._onBoldClick.bind(this);
     this.handleSave = this._handleSave.bind(this);
+
+    this.toggleBlockType = this._toggleBlockType.bind(this);
     this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
 
   }
@@ -59,7 +62,7 @@ export default class MyEditor extends Component {
     // }
   }
 
-  handleKeyCommand(command, editorState) {
+  _handleKeyCommand(command, editorState) {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     
     if (newState) {
@@ -79,6 +82,15 @@ export default class MyEditor extends Component {
     }
     return 'not-handled';
     // this.handleChange(RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD'));
+  }
+
+  _toggleBlockType(blockType) {
+    this.handleChange(
+      RichUtils.toggleBlockType(
+        this.state.editorState,
+        blockType
+      )
+    );
   }
 
   _toggleInlineStyle(inlineStyle) {
@@ -129,15 +141,20 @@ export default class MyEditor extends Component {
     }
     return (
       <div className="my-editor-main">
+      <div className="container-controls">
+        <div className="left controls-style">
+          <BlockStyleControls
+            editorState={editorState}
+            onToggle={this.toggleBlockType}
+          />
+        </div>
         <div className="right controls-style">
-          {/* <button className="my-button" onClick={this.onBoldClick}>Bold</button> */}
           <InlineStyleControls
             editorState={editorState}
             onToggle={this.toggleInlineStyle}
           />
         </div>
-        {/* <button onClick={this._onTestClick.bind(this)}>Test</button> */}
-        {/* <button onClick={this.logState}>Log State</button> */}
+      </div>
         <Editor 
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
