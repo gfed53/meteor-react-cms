@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
 
+import { InlineStyleControls } from './InlineStyleControls.jsx';
+
 
 export default class MyEditor extends Component {
 
@@ -28,8 +30,9 @@ export default class MyEditor extends Component {
     };
 
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
-    this._onBoldClick = this._onBoldClick.bind(this);
-    this.handleSave = this.handleSave.bind(this);
+    this.onBoldClick = this._onBoldClick.bind(this);
+    this.handleSave = this._handleSave.bind(this);
+    this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
 
   }
 
@@ -78,12 +81,21 @@ export default class MyEditor extends Component {
     // this.handleChange(RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD'));
   }
 
+  _toggleInlineStyle(inlineStyle) {
+    this.handleChange(
+      RichUtils.toggleInlineStyle(
+        this.state.editorState,
+        inlineStyle
+      )
+    );
+  }
+
   _onTestClick() {
     console.log('currentContent',this.state.editorState.getCurrentContent());
   }
 
   // Extracts content from editorState, then converts it to raw, more easily storable object, which is then passed up to Home component and saved within data model (in Home state for now)
-  handleSave(){
+  _handleSave(){
     const content = this.state.editorState.getCurrentContent();
     const raw = convertToRaw(content);
 
@@ -98,6 +110,7 @@ export default class MyEditor extends Component {
 
 
   render() {
+    const {editorState} = this.state;
     const controls = null;
 
     if(this.props.draft_content){
@@ -117,7 +130,11 @@ export default class MyEditor extends Component {
     return (
       <div className="my-editor-main">
         <div className="right controls-style">
-          <button className="my-button" onClick={this._onBoldClick}>Bold</button>
+          {/* <button className="my-button" onClick={this.onBoldClick}>Bold</button> */}
+          <InlineStyleControls
+            editorState={editorState}
+            onToggle={this.toggleInlineStyle}
+          />
         </div>
         {/* <button onClick={this._onTestClick.bind(this)}>Test</button> */}
         {/* <button onClick={this.logState}>Log State</button> */}

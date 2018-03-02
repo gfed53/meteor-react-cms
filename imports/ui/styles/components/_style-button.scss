@@ -1,0 +1,10 @@
+.my-style-button {
+  transition: 250ms ease-in-out all;
+  cursor: pointer;
+  padding: 0.25em;
+}
+
+.active {
+  background: black;
+  color: white;
+}
