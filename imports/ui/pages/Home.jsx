@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
 
 import { Posts } from '../components/Posts.jsx';
 import PostCreate from '../components/PostCreate.jsx';
@@ -31,6 +32,8 @@ export default class Home extends Component {
   }
 
   componentDidMount(){
+    console.log('componentDidMount');
+    console.log('this.props',this.props);
   }
 
   componentWillUpdate(){
@@ -119,3 +122,12 @@ export default class Home extends Component {
     );
   }
 }
+
+// export default createContainer(() => {
+//   Meteor.subscribe('posts');
+//   return {
+//     tasks: Tasks.find({}, {sort: {createdAt: -1} }).fetch(),
+//     incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
+//     currentUser: Meteor.user(),
+//   };
+// }, App);
