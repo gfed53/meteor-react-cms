@@ -12,6 +12,7 @@ export default class Home extends Component {
     super(props);
     this.state = {
       // Mock data for now
+      postCount: 0,
       posts: [
         // {
         //   id: 1,
@@ -38,8 +39,8 @@ export default class Home extends Component {
   }
 
   componentDidUpdate(){
-    // console.log('componentDidUpdate');
-    // console.log('this.state.posts',this.state.posts);
+    console.log('componentDidUpdate');
+    console.log('this.state.posts',this.state.posts);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -54,10 +55,13 @@ export default class Home extends Component {
 
   _handleNewPost(post){
     const updatedPosts = [...this.state.posts];
-    post.id = updatedPosts.length+1;
+    post.id = this.state.postCount+1;
+    // this.setState({postCount: post.id});
+    
     // console.log('post in Home',post);
     updatedPosts.unshift(post);
     this.setState({
+      postCount: post.id,
       posts: updatedPosts
     });
 
@@ -100,6 +104,16 @@ export default class Home extends Component {
 
   _handleDeletedPost(post_id){
     console.log('we delete post',post_id);
+
+    const updatedPosts = [...this.state.posts];
+    let postIndex = updatedPosts.findIndex((item) => item.id === post_id);
+
+    updatedPosts.splice(postIndex,1);
+
+    this.setState({
+      posts: updatedPosts
+    });
+
   }
 
   render() {
