@@ -64,10 +64,6 @@ export default class Home extends Component {
       postCount: post.id,
       posts: updatedPosts
     });
-
-    // setTimeout(() => {
-    //   console.log('this.state.posts',this.state.posts);
-    // }, 0);
     
   }
 
@@ -95,10 +91,6 @@ export default class Home extends Component {
     this.setState({
       posts: updatedPosts
     });
-
-    
-
-
 
   }
 

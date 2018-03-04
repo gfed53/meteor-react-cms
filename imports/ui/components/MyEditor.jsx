@@ -119,6 +119,11 @@ export default class MyEditor extends Component {
     });
   }
 
+  // Only used during edit state, not create state. 
+  // _handleCancel(){
+
+  // }
+
 
 
   render() {
@@ -129,7 +134,7 @@ export default class MyEditor extends Component {
       controls = (
         <div className="controls-main">
           <button className="my-button" onClick={this.handleSave}>Save</button>
-          <button className="my-button">Cancel</button>
+          <button className="my-button" onClick={this.props.onCancel}>Cancel</button>
         </div>
       );
     } else {

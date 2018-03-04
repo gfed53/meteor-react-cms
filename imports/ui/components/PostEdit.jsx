@@ -9,6 +9,7 @@ export default class PostEdit extends Component {
     super(props);
 
     this.handleSave = this.handleSave.bind(this);
+    this.handleCancel = this._handleCancel.bind(this);
   }
 
   handleSave(draft_content){
@@ -28,12 +29,16 @@ export default class PostEdit extends Component {
     
   }
 
+  _handleCancel(){
+    this.props.onClose();
+  }
+
 
   render() {
     return (
       <div>
         Now Editing...
-        <MyEditor onSave={this.handleSave} draft_content={this.props.draft_content} />
+        <MyEditor onSave={this.handleSave} onCancel={this.handleCancel} draft_content={this.props.draft_content} />
       </div>
     );
   }
