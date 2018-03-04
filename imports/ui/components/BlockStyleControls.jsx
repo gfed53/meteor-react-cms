@@ -26,9 +26,9 @@ export const BlockStyleControls = (props) => {
 
   // console.log('blockType',blockType);
   // console.log('selection',selection);
-  console.log(editorState
-    .getCurrentContent()
-    .getBlockForKey(selection.getStartKey()));
+  // console.log(editorState
+  //   .getCurrentContent()
+  //   .getBlockForKey(selection.getStartKey()));
 
   return (
     <div className="RichEditor-controls">

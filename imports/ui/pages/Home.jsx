@@ -23,8 +23,9 @@ export default class Home extends Component {
       ]
     }
 
-    this.handleNewPost = this.handleNewPost.bind(this);
-    this.handleEditedPost = this.handleEditedPost.bind(this);
+    this.handleNewPost = this._handleNewPost.bind(this);
+    this.handleEditedPost = this._handleEditedPost.bind(this);
+    this.handleDeletedPost = this._handleDeletedPost.bind(this);
 
   }
 
@@ -51,7 +52,7 @@ export default class Home extends Component {
   renderData(){
   }
 
-  handleNewPost(post){
+  _handleNewPost(post){
     const updatedPosts = [...this.state.posts];
     post.id = updatedPosts.length+1;
     // console.log('post in Home',post);
@@ -66,7 +67,7 @@ export default class Home extends Component {
     
   }
 
-  handleEditedPost(post_id, updates){
+  _handleEditedPost(post_id, updates){
     // console.log('handleEditedPost');
     // console.log('post_id',post_id);
     // console.log('updates',updates);
@@ -97,13 +98,17 @@ export default class Home extends Component {
 
   }
 
+  _handleDeletedPost(post_id){
+    console.log('we delete post',post_id);
+  }
+
   render() {
     return (
       <div>
         {/* This is the homepage. */}
         
         <PostCreate onSave={this.handleNewPost} />
-        <Posts onSave={this.handleEditedPost} posts={this.state.posts} />
+        <Posts onSave={this.handleEditedPost} onDelete={this.handleDeletedPost} posts={this.state.posts} />
       </div>
     );
   }

@@ -15,6 +15,7 @@ export default class Post extends Component {
     }
 
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this._handleDelete.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
@@ -22,6 +23,10 @@ export default class Post extends Component {
     this.setState({
       isEditing: true
     });
+  }
+
+  _handleDelete(){
+    this.props.onDelete(this.props.data.id);
   }
 
   // Closes PostEdit. This will be passed into PostEdit component (and hopefully will work..)
@@ -54,8 +59,9 @@ export default class Post extends Component {
       content = (
         <div>
           <PostDisplay data={this.getDraftHtml(this.props.data.draft_content)} />
-          <div className="post-button-edit-container">
+          <div className="post-button-container">
             <button className="my-button" onClick={this.handleEdit}>Edit</button>
+            <button className="my-button" onClick={this.handleDelete}>Delete</button>
           </div>
         </div>
       );
