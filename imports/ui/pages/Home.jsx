@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 
-import { Posts } from '../components/Posts.jsx';
+import { PostsList } from '../components/PostsList.jsx';
 import PostCreate from '../components/PostCreate.jsx';
 
+import { Posts } from '../../api/posts.js';
+
  
-export default class Home extends Component {
+class Home extends Component {
 
   
 
@@ -117,17 +119,17 @@ export default class Home extends Component {
         {/* This is the homepage. */}
         
         <PostCreate onSave={this.handleNewPost} />
-        <Posts onSave={this.handleEditedPost} onDelete={this.handleDeletedPost} posts={this.state.posts} />
+        <PostsList onSave={this.handleEditedPost} onDelete={this.handleDeletedPost} posts={this.state.posts} />
       </div>
     );
   }
 }
 
-// export default createContainer(() => {
-//   Meteor.subscribe('posts');
-//   return {
-//     tasks: Tasks.find({}, {sort: {createdAt: -1} }).fetch(),
-//     incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
-//     currentUser: Meteor.user(),
-//   };
-// }, App);
+export default withTracker(() => {
+  Meteor.subscribe('posts');
+  return {
+    posts: Posts.find({}, {sort: {createdAt: -1} }).fetch()
+    // incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
+    // currentUser: Meteor.user(),
+  };
+})(Home);
