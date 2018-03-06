@@ -93,30 +93,34 @@ class Home extends Component {
     
   }
 
-  _handleEditedPost(post_id, updates){
+  _handleEditedPost(post_id, draft_content){
     // console.log('handleEditedPost');
-    // console.log('post_id',post_id);
+    console.log('post_id',post_id);
+    console.log('draft_content',draft_content);
+
     // console.log('updates',updates);
-    const updatedPosts = [...this.state.posts];
+    // const updatedPosts = [...this.state.posts];
     // console.log('updatedPosts',updatedPosts);
 
     // let post = updatedPosts[post_id-1];
-    let postIndex = updatedPosts.findIndex((item) => item.id === post_id);
+    // let postIndex = updatedPosts.findIndex((item) => item.id === post_id);
     // console.log('postIndex',postIndex);
-    let post = updatedPosts[postIndex];
+    // let post = updatedPosts[postIndex];
     // console.log('post',post);
 
     // Now we should have a reference to our existing post.
 
-    let updatedPost = Object.assign(post, updates);
+    // let updatedPost = Object.assign(post, updates);
 
     // console.log('updatedPost',updatedPost);
 
-    updatedPosts[postIndex] = updatedPost;
+    // updatedPosts[postIndex] = updatedPost;
 
-    this.setState({
-      posts: updatedPosts
-    });
+    // this.setState({
+    //   posts: updatedPosts
+    // });
+
+    Meteor.call('posts.edit', post_id, draft_content);
 
   }
 
@@ -151,6 +155,7 @@ class Home extends Component {
 export default withTracker(() => {
   Meteor.subscribe('posts');
   return {
+    // We can sort by date_posted or date_last_edited, what should we do?
     posts: Posts.find({}, {sort: {date_posted: -1} }).fetch()
     // incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
     // currentUser: Meteor.user(),

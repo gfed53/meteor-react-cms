@@ -52,6 +52,18 @@ Meteor.methods({
  
     Posts.remove(postId);
   },
+  'posts.edit'(postId, draft_content) {
+    check(postId, String);
+
+    // const post = Posts.findOne(postId);
+
+    // if (task.owner !== Meteor.userId()) {
+    //   // If the task is private (or public), make sure only the owner can check it off
+    //   throw new Meteor.Error('not-authorized');
+    // }
+ 
+    Posts.update(postId, { $set: { draft_content, date_last_edited: new Date() } });
+  },
 });
 
 
