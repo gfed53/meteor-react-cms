@@ -15,7 +15,7 @@ class Home extends Component {
     super(props);
     this.state = {
       // Mock data for now
-      postCount: 0
+      // postCount: 0
       // posts: [
       //   // {
       //   //   id: 1,
@@ -38,7 +38,7 @@ class Home extends Component {
   componentDidMount(){
     console.log('componentDidMount');
     console.log('this.props',this.props);
-    this.determinePostCount();
+    // this.determinePostCount();
   }
 
   componentWillUpdate(){
@@ -63,13 +63,13 @@ class Home extends Component {
   }
 
   // May use this. Tenative for now
-  determinePostCount(){
-    let _postCount = this.props.posts.length ? this.props.posts[0].id : 0;
+  // determinePostCount(){
+  //   let _postCount = this.props.posts.length ? this.props.posts[0].id : 0;
 
-    this.setState({
-      postCount: _postCount
-    });
-  }
+  //   this.setState({
+  //     postCount: _postCount
+  //   });
+  // }
 
   // _handleNewPost(post){
   //   const updatedPosts = [...this.state.posts];
@@ -123,14 +123,16 @@ class Home extends Component {
   _handleDeletedPost(post_id){
     console.log('we delete post',post_id);
 
-    const updatedPosts = [...this.state.posts];
-    let postIndex = updatedPosts.findIndex((item) => item.id === post_id);
+    // const updatedPosts = [...this.state.posts];
+    // let postIndex = updatedPosts.findIndex((item) => item.id === post_id);
 
-    updatedPosts.splice(postIndex,1);
+    // updatedPosts.splice(postIndex,1);
 
-    this.setState({
-      posts: updatedPosts
-    });
+    // this.setState({
+    //   posts: updatedPosts
+    // });
+
+    Meteor.call('posts.remove', post_id);
 
   }
 

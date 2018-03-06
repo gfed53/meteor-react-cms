@@ -26,7 +26,7 @@ export default class Post extends Component {
   }
 
   _handleDelete(){
-    this.props.onDelete(this.props.data.id);
+    this.props.onDelete(this.props.data._id);
   }
 
   // Closes PostEdit. This will be passed into PostEdit component (and hopefully will work..)

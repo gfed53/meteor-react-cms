@@ -36,6 +36,22 @@ Meteor.methods({
       author: 'Anon',
     });
   },
+  'posts.remove'(postId) {
+    check(postId, String);
+
+    const post = Posts.findOne(postId);
+    // if (task.owner !== Meteor.userId()) {
+    //   // If the task is private (or public), make sure only the owner can delete it
+    //   throw new Meteor.Error('not-authorized');
+    // }
+
+    // if (task.private && task.owner !== Meteor.userId()) {
+    //   // If the task is private, make sure only the owner can delete it
+    //   throw new Meteor.Error('not-authorized');
+    // }
+ 
+    Posts.remove(postId);
+  },
 });
 
 
