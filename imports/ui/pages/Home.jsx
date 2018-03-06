@@ -48,7 +48,8 @@ class Home extends Component {
 
   componentDidUpdate(){
     console.log('componentDidUpdate');
-    console.log('this.state.posts',this.state.posts);
+    console.log('this.props',this.props);
+    console.log('this.state',this.state);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -70,17 +71,25 @@ class Home extends Component {
     });
   }
 
-  _handleNewPost(post){
-    const updatedPosts = [...this.state.posts];
-    post.id = this.state.postCount+1;
-    // this.setState({postCount: post.id});
+  // _handleNewPost(post){
+  //   const updatedPosts = [...this.state.posts];
+  //   post.id = this.state.postCount+1;
+  //   // this.setState({postCount: post.id});
     
-    // console.log('post in Home',post);
-    updatedPosts.unshift(post);
-    this.setState({
-      postCount: post.id,
-      posts: updatedPosts
-    });
+  //   // console.log('post in Home',post);
+  //   updatedPosts.unshift(post);
+  //   this.setState({
+  //     postCount: post.id,
+  //     posts: updatedPosts
+  //   });
+    
+  // }
+
+  _handleNewPost(post){
+    const draft_content = post.draft_content;
+    console.log('draft_content',draft_content);
+    
+    Meteor.call('posts.insert', draft_content);
     
   }
 
@@ -140,7 +149,7 @@ class Home extends Component {
 export default withTracker(() => {
   Meteor.subscribe('posts');
   return {
-    posts: Posts.find({}, {sort: {createdAt: -1} }).fetch()
+    posts: Posts.find({}, {sort: {date_posted: -1} }).fetch()
     // incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
     // currentUser: Meteor.user(),
   };
