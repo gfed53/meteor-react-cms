@@ -15,17 +15,19 @@ class Home extends Component {
     super(props);
     this.state = {
       // Mock data for now
-      postCount: 0,
-      posts: [
-        // {
-        //   id: 1,
-        //   author: 'Anon',
-        //   date_posted: new Date('2018-01-01'),
-        //   date_last_edited: null,
-        //   draft_content: {}
-        // }
-      ]
+      postCount: 0
+      // posts: [
+      //   // {
+      //   //   id: 1,
+      //   //   author: 'Anon',
+      //   //   date_posted: new Date('2018-01-01'),
+      //   //   date_last_edited: null,
+      //   //   draft_content: {}
+      //   // }
+      // ]
     }
+
+    
 
     this.handleNewPost = this._handleNewPost.bind(this);
     this.handleEditedPost = this._handleEditedPost.bind(this);
@@ -36,6 +38,7 @@ class Home extends Component {
   componentDidMount(){
     console.log('componentDidMount');
     console.log('this.props',this.props);
+    this.determinePostCount();
   }
 
   componentWillUpdate(){
@@ -56,6 +59,15 @@ class Home extends Component {
   }
 
   renderData(){
+  }
+
+  // May use this. Tenative for now
+  determinePostCount(){
+    let _postCount = this.props.posts.length ? this.props.posts[0].id : 0;
+
+    this.setState({
+      postCount: _postCount
+    });
   }
 
   _handleNewPost(post){
@@ -119,7 +131,7 @@ class Home extends Component {
         {/* This is the homepage. */}
         
         <PostCreate onSave={this.handleNewPost} />
-        <PostsList onSave={this.handleEditedPost} onDelete={this.handleDeletedPost} posts={this.state.posts} />
+        <PostsList onSave={this.handleEditedPost} onDelete={this.handleDeletedPost} posts={this.props.posts} />
       </div>
     );
   }
