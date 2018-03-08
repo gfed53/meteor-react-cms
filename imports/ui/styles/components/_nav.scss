@@ -1,0 +1,10 @@
+.list-row {
+  margin: 0.25em;
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+
+  li {
+    margin: 0 0.5em;
+  }
+}
