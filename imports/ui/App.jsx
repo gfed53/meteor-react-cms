@@ -1,11 +1,11 @@
 import React from 'react';
 
+import Header from './components/Header.jsx';
+
 
 export const App = ({content}) => (
   <div className="container" id="main-container">
-  	<header>
-  		{/* Nav would probably go here */}
-  	</header>
+  	<Header />
     {content}
   </div>
 );
