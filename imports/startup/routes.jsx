@@ -3,7 +3,7 @@ import React from 'react';
 import { mount } from 'react-mounter';
 
 // All Layouts and Pages
-import { App } from '../ui/App.jsx';
+import App from '../ui/App.jsx';
 import Home from '../ui/pages/Home.jsx';
 
 
