@@ -90,6 +90,8 @@ class Home extends Component {
     console.log('draft_content',draft_content);
     
     Meteor.call('posts.insert', draft_content);
+
+    Bert.alert( 'New post successfully created!', 'success', 'growl-bottom-right');
     
   }
 
@@ -122,6 +124,8 @@ class Home extends Component {
 
     Meteor.call('posts.edit', post_id, draft_content);
 
+    Bert.alert( 'Post successfully edited!', 'success', 'growl-bottom-right');
+
   }
 
   _handleDeletedPost(post_id){
@@ -136,7 +140,11 @@ class Home extends Component {
     //   posts: updatedPosts
     // });
 
+    // Would probably want a prompt here, right? One that returns promise is preferable.
+
     Meteor.call('posts.remove', post_id);
+
+    Bert.alert( 'Post successfully deleted!', 'success', 'growl-bottom-right');
 
   }
 
