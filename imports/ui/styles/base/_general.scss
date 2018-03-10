@@ -1,8 +1,14 @@
 .my-button {
+  transition: 250ms ease-in-out all;
   -webkit-appearance: none;
   -moz-appearance: none;
+  cursor: pointer;
   background: white;
   margin: 0 0.25em;
   border: 1px solid lightgrey;
   border-radius: 2px;
+}
+
+.my-button:hover {
+  border: 1px solid rgb(90, 90, 90);
 }
