@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 
+import vex from 'vex-js';
+import dialog from 'vex-dialog';
+vex.registerPlugin(dialog);
+vex.defaultOptions.className = 'vex-theme-os'
+
+
+
 import { PostsList } from '../components/PostsList.jsx';
 import PostCreate from '../components/PostCreate.jsx';
 
@@ -27,6 +34,8 @@ class Home extends Component {
       // ]
     }
 
+    // vex.registerPlugin(dialog);
+
     
 
     this.handleNewPost = this._handleNewPost.bind(this);
@@ -35,10 +44,13 @@ class Home extends Component {
 
   }
 
+  
+
   componentDidMount(){
     console.log('componentDidMount');
     console.log('this.props',this.props);
     // this.determinePostCount();
+    
   }
 
   componentWillUpdate(){
@@ -141,10 +153,23 @@ class Home extends Component {
     // });
 
     // Would probably want a prompt here, right? One that returns promise is preferable.
+    console.log('vex',vex);
+    console.log('dialog',dialog);
+    vex.dialog.confirm({
+      message: 'Are you sure you want to delete this post?',
+      callback: function (value) {
+          if (value) {
+              console.log('Successfully deleted.');
+              Meteor.call('posts.remove', post_id);
+              Bert.alert( 'Post successfully deleted!', 'success', 'growl-bottom-right');
+          } else {
+              console.log('Didnt delete.');
+          }
+      }
+    });
 
-    Meteor.call('posts.remove', post_id);
-
-    Bert.alert( 'Post successfully deleted!', 'success', 'growl-bottom-right');
+    // Meteor.call('posts.remove', post_id);
+    // Bert.alert( 'Post successfully deleted!', 'success', 'growl-bottom-right');
 
   }
 

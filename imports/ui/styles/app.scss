@@ -1,9 +1,12 @@
 @import "simple-grid.scss"; 
 @import "Draft.scss";
+@import "vex.scss";
+@import "vex-theme-os.scss";
 
 // Base
 @import "{}/imports/ui/styles/base/variables";
 @import "{}/imports/ui/styles/base/general";
+
 
 // Components
 @import "{}/imports/ui/styles/components/header";
