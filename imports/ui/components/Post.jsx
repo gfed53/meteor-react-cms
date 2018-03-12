@@ -52,6 +52,12 @@ export default class Post extends Component {
     const button = null;
     const postEdit = null;
     const content = null;
+    const postButtons = this.props.data.owner && this.props.data.owner === Meteor.userId() ? (
+      <div className="post-button-container">
+        <button className="my-button" onClick={this.handleEdit}>Edit</button>
+        <button className="my-button" onClick={this.handleDelete}>Delete</button>
+      </div>
+    ) : null;
 
     if(this.state.isEditing){
       content = <PostEdit post_id={this.props.data._id} onSave={this.props.onSave} onClose={this.handleClose} draft_content={this.props.data.draft_content} />;
@@ -59,10 +65,8 @@ export default class Post extends Component {
       content = (
         <div>
           <PostDisplay data={this.getDraftHtml(this.props.data.draft_content)} />
-          <div className="post-button-container">
-            <button className="my-button" onClick={this.handleEdit}>Edit</button>
-            <button className="my-button" onClick={this.handleDelete}>Delete</button>
-          </div>
+          
+          {postButtons}
         </div>
       );
       // button = (<div className="post-button-edit-container">
