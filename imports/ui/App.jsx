@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { withTracker } from 'meteor/react-meteor-data';
 
 import Header from './components/Header.jsx';
 
-export default class App extends Component {
+class App extends Component {
   constructor(props){
     super(props);
 
@@ -21,4 +22,10 @@ export default class App extends Component {
     ); 
   }
 }
+
+export default withTracker(() => {
+  // Meteor.subscribe('posts');
+  return {
+  };
+})(App);
 

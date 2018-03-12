@@ -23,3 +23,5 @@ fourseven:scss
 kadira:flow-router
 react-meteor-data
 themeteorchef:bert
+accounts-ui
+accounts-password
