@@ -33,7 +33,8 @@ Meteor.methods({
       draft_content,
       date_posted: new Date(),
       date_last_edited: new Date(),
-      author: 'Anon',
+      owner: Meteor.user() ? Meteor.userId() : null,
+      author: Meteor.user() ? Meteor.user().username : 'Anon',
     });
   },
   'posts.remove'(postId) {

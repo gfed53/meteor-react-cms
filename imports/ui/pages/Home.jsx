@@ -189,8 +189,8 @@ export default withTracker(() => {
   Meteor.subscribe('posts');
   return {
     // We can sort by date_posted or date_last_edited, what should we do?
-    posts: Posts.find({}, {sort: {date_posted: -1} }).fetch()
+    posts: Posts.find({}, {sort: {date_posted: -1} }).fetch(),
     // incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
-    // currentUser: Meteor.user(),
+    currentUser: Meteor.user(),
   };
 })(Home);
