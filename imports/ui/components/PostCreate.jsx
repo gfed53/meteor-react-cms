@@ -13,16 +13,13 @@ export default class PostCreate extends Component {
 
   // For saving a new post
   handleSave(draftContent){
-    console.log('draftContent',draftContent);
     const post = {
-      // Anon for now, will probably pull username from Meteor backend using account system
+      // Anon for now if user is not logged in.
       author: 'Anon',
       date_posted: new Date(),
       date_last_edited: new Date(),
       draft_content: draftContent
     }
-
-    // console.log('post in postCreate',post);
 
     this.props.onSave(post);
   }

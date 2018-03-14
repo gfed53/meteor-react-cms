@@ -10,7 +10,9 @@ export default class MyEditor extends Component {
   constructor(props) {
     super(props);
 
-    /* This component may be passed existing content.
+    /* 
+    
+    This component may be passed existing content.
     If so, we use convertFromRaw(data) to get contentState, then use createWithContent(contentState), setting that to state.editorState.
 
     Else, we just use createEmpty().
@@ -19,15 +21,12 @@ export default class MyEditor extends Component {
     this.state = {editorState: EditorState.createEmpty()};
 
     this.handleChange = (editorState) => {
-      // console.log('editorState',editorState);
       this.setState({editorState});
       const content = this.state.editorState.getCurrentContent();
-      // console.log('converted on change',convertToRaw(content));
     };
 
     this.logState = (editorState) => {
       const content = editorState.getCurrentContent();
-      // console.log('logState',convertToRaw(content));
     };
 
     this.handleKeyCommand = this._handleKeyCommand.bind(this);
@@ -41,11 +40,8 @@ export default class MyEditor extends Component {
 
   componentDidMount(){
     if(this.props.draft_content){
-      // console.log('draft_content',this.props.draft_content);
       const content = convertFromRaw(this.props.draft_content);
-      // console.log('content',content);
       const existing_state = EditorState.createWithContent(content);
-      // console.log('existing_state',existing_state);
 
       this.setState({
         editorState: EditorState.createWithContent(content)
@@ -55,11 +51,6 @@ export default class MyEditor extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log('running?');
-    // if(nextProps.draft_content){
-    //   const content = convertFromRaw(draft_content);
-    //   console.log('content',content);
-    // }
   }
 
   _handleKeyCommand(command, editorState) {
@@ -81,7 +72,6 @@ export default class MyEditor extends Component {
       return 'handled';
     }
     return 'not-handled';
-    // this.handleChange(RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD'));
   }
 
   _toggleBlockType(blockType) {
@@ -102,10 +92,6 @@ export default class MyEditor extends Component {
     );
   }
 
-  _onTestClick() {
-    console.log('currentContent',this.state.editorState.getCurrentContent());
-  }
-
   // Extracts content from editorState, then converts it to raw, more easily storable object, which is then passed up to Home component and saved within data model (in Home state for now)
   _handleSave(){
     const content = this.state.editorState.getCurrentContent();
@@ -118,13 +104,6 @@ export default class MyEditor extends Component {
       editorState: EditorState.createEmpty()
     });
   }
-
-  // Only used during edit state, not create state. 
-  // _handleCancel(){
-
-  // }
-
-
 
   render() {
     const {editorState} = this.state;
@@ -166,10 +145,6 @@ export default class MyEditor extends Component {
           onChange={this.handleChange}
         />
         {controls}
-        {/* <div className="controls-main">
-          <button className="my-button" onClick={this.handleSave}>Save</button>
-          <button className="my-button">Cancel</button>
-        </div> */}
       </div>
     );
   }

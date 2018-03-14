@@ -12,8 +12,7 @@ const BLOCK_TYPES = [
   {label: 'H6', style: 'header-six'},
   {label: 'Blockquote', style: 'blockquote'},
   {label: 'UL', style: 'unordered-list-item'},
-  {label: 'OL', style: 'ordered-list-item'},
-  {label: 'Code Block', style: 'code-block'},
+  {label: 'OL', style: 'ordered-list-item'}
 ];
 
 export const BlockStyleControls = (props) => {
@@ -23,12 +22,6 @@ export const BlockStyleControls = (props) => {
     .getCurrentContent()
     .getBlockForKey(selection.getStartKey())
     .getType();
-
-  // console.log('blockType',blockType);
-  // console.log('selection',selection);
-  // console.log(editorState
-  //   .getCurrentContent()
-  //   .getBlockForKey(selection.getStartKey()));
 
   return (
     <div className="RichEditor-controls">
