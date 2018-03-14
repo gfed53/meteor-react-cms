@@ -2,7 +2,8 @@
   "name": "meteor-react-cms",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "meteor": "MONGO_URL=mongodb://gfed123:flob1357@ds215019.mlab.com:15019/cheesy-white-cms meteor"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
