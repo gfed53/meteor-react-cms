@@ -1,0 +1,22 @@
+#login-buttons {
+
+  #login-sign-in-link,
+  #login-name-link,
+  .login-button {
+    transition: 250ms ease-in-out all;
+  }
+  
+  #login-sign-in-link,
+  #login-name-link {
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+  }
+  
+  #login-sign-in-link:hover,
+  #login-name-link:hover {
+    transform: translateY(-2px);
+  }
+}
+
+
