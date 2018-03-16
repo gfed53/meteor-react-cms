@@ -126,13 +126,13 @@ export default class MyEditor extends Component {
     return (
       <div className="my-editor-main">
       <div className="container-controls">
-        <div className="left controls-style">
+        <div className="controls-style">
           <BlockStyleControls
             editorState={editorState}
             onToggle={this.toggleBlockType}
           />
         </div>
-        <div className="right controls-style">
+        <div className="controls-style">
           <InlineStyleControls
             editorState={editorState}
             onToggle={this.toggleInlineStyle}

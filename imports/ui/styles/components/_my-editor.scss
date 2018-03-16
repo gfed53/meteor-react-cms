@@ -3,8 +3,9 @@
     margin: 1em 0;
   }
   .controls-style {
-    margin: 0 1em;
-    display: inline-block;
+    margin: 0.75em 0;
+    // margin: 0 1em;
+    // display: inline-block;
   }
 
   .controls-main {
@@ -22,4 +23,13 @@
   //   border-radius: 2px;
 
   // }
+}
+
+@media screen and (min-width: 760px){
+  .my-editor-main {
+    .controls-style {
+      margin: 0 1em;
+      display: inline-block;
+    }
+  }
 }
