@@ -33,8 +33,7 @@ class Home extends Component {
   componentDidUpdate(){
   }
 
-  componentWillReceiveProps(nextProps) { 
-    console.log('posts',nextProps.posts);
+  componentWillReceiveProps(nextProps) {
   }
 
   _handleNewPost(post){
@@ -66,7 +65,6 @@ class Home extends Component {
           }
       }
     });
-
   }
 
   render() {
@@ -82,7 +80,7 @@ class Home extends Component {
 export default withTracker(() => {
   Meteor.subscribe('posts');
   return {
-    // We can sort by date_posted or date_last_edited, what should we do?
+    // We can sort by date_posted or date_last_edited, sorting by date_posted for now.
     posts: Posts.find({}, {sort: {date_posted: -1} }).fetch(),
     currentUser: Meteor.user(),
   };
