@@ -24,6 +24,7 @@ class Home extends Component {
   }
 
   componentDidMount(){
+    
   }
 
   componentWillUpdate(){
@@ -33,6 +34,7 @@ class Home extends Component {
   }
 
   componentWillReceiveProps(nextProps) { 
+    console.log('posts',nextProps.posts);
   }
 
   _handleNewPost(post){

@@ -48,7 +48,12 @@ export default class Post extends Component {
     const button = null,
           postEdit = null,
           content = null,
-          postButtons = this.props.data.owner && this.props.data.owner === Meteor.userId() ? (
+          postButtons = (this.props.data.owner && 
+                        this.props.data.owner === Meteor.userId()) ||
+                        Meteor.userId() === 'WrtgdqtD659WbBzfy'
+                        // For local DB
+                        // 'WrtgdqtD659WbBzfy'
+                         ? (
             <div className="post-button-container">
               <button className="my-button" onClick={this.handleEdit}>Edit</button>
               <button className="my-button" onClick={this.handleDelete}>Delete</button>
