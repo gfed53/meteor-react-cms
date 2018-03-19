@@ -1,7 +1,8 @@
-@import "simple-grid.scss"; 
-@import "Draft.scss";
-@import "vex.scss";
-@import "vex-theme-os.scss";
+// Third-party
+@import "{}/imports/ui/styles/third-party/simple-grid.scss"; 
+@import "{}/imports/ui/styles/third-party/Draft.scss";
+@import "{}/imports/ui/styles/third-party/vex.scss";
+@import "{}/imports/ui/styles/third-party/vex-theme-os.scss";
 
 // Base
 @import "{}/imports/ui/styles/base/variables";

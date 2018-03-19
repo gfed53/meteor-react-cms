@@ -4,7 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import vex from 'vex-js';
 import dialog from 'vex-dialog';
 vex.registerPlugin(dialog);
-vex.defaultOptions.className = 'vex-theme-os'
+vex.defaultOptions.className = 'vex-theme-os';
 
 import { PostsList } from '../components/PostsList.jsx';
 import PostCreate from '../components/PostCreate.jsx';
