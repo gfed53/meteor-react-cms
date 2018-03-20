@@ -10,13 +10,11 @@ export default class MyEditor extends Component {
   constructor(props) {
     super(props);
 
-    /* 
-    
-    This component may be passed existing content.
-    If so, we use convertFromRaw(data) to get contentState, then use createWithContent(contentState), setting that to state.editorState.
+    /*-----------------------------------------------------------
+      This component may be passed existing content.
+      If so, we use convertFromRaw(data) to get contentState, then use createWithContent(contentState), setting that to state.editorState.
 
-    Else, we just use createEmpty().
-
+      Else, we just use createEmpty().
     */
     this.state = {editorState: EditorState.createEmpty()};
 
@@ -99,7 +97,7 @@ export default class MyEditor extends Component {
 
     this.props.onSave(raw);
 
-    //Clear editorState afterwards (is there a better way?)
+    // Clear editorState afterwards (is there a better way?)
     this.setState({
       editorState: EditorState.createEmpty()
     });

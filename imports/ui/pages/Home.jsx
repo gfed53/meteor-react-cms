@@ -20,7 +20,6 @@ class Home extends Component {
     this.handleNewPost = this._handleNewPost.bind(this);
     this.handleEditedPost = this._handleEditedPost.bind(this);
     this.handleDeletedPost = this._handleDeletedPost.bind(this);
-
   }
 
   componentDidMount(){

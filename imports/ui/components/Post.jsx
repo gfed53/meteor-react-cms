@@ -50,11 +50,11 @@ export default class Post extends Component {
           content = null,
           postButtons = (this.props.data.owner && 
                         this.props.data.owner === Meteor.userId()) ||
-                        Meteor.userId() === 'WrtgdqtD659WbBzfy'
-                        /* 
-                        Admins are allowed to edit and delete any post within the app.
-                        'WrtgdqtD659WbBzfy' is just a test admin's ID for my local repo's database. If you're 
-                        creating your own local build of this app, you'd replace this string with whatever user ID you'd want to give admin privileges to.   
+                        Meteor.userId() === 'WrtgdqtD659WbBzfy' // Admin userId, unlimited power!!
+                        /*-----------------------------------------------------------
+                          Admins are allowed to edit and delete any post within the app.
+                          'WrtgdqtD659WbBzfy' is just a test admin's ID for my local repo's database. If you're 
+                          creating your own local build of this app, you'd replace this string with whatever user ID you'd want to give admin privileges to.   
                         */
                          ? (
             <div className="post-button-container">
