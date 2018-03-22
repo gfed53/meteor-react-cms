@@ -6,7 +6,8 @@ import dialog from 'vex-dialog';
 vex.registerPlugin(dialog);
 vex.defaultOptions.className = 'vex-theme-os';
 
-import { PostsList } from '../components/PostsList.jsx';
+// import { PostsList } from '../components/PostsList.jsx';
+import PostsList from '../components/PostsList.jsx';
 import PostCreate from '../components/PostCreate.jsx';
 
 import { Posts } from '../../api/posts.js';

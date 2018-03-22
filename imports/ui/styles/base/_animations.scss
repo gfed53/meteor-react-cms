@@ -1,0 +1,21 @@
+.fadeslide-enter {
+  opacity: 0.01;
+  transform: translateX(-2.5em);
+}
+
+.fadeslide-enter.fadeslide-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 250ms ease-in-out;
+}
+
+.fadeslide-leave {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fadeslide-leave.fadeslide-leave-active {
+  opacity: 0.01;
+  transform: translateX(25em);
+  transition: all 250ms ease-in-out;
+}
