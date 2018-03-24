@@ -20,7 +20,9 @@ Earlier dabblings of this (among other parts of the potential project) can be se
 
 ## Setup
 
-* Meteor must be installed locally. Instructions [here](https://www.meteor.com/install).
+* Meteor, Node.js, and npm must be installed locally. 
+  * [Node/npm instructions](https://www.npmjs.com/get-npm)
+  * [Meteor instructions](https://www.meteor.com/install)
 
 * Once you've cloned the repo, in the terminal navigate to the root of the project by entering `cd ~/PATH_TO/meteor-react-cms`, and run `meteor npm i` to install the node dependencies.
 
