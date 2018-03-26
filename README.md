@@ -30,5 +30,5 @@ Earlier dabblings of this (among other parts of the potential project) can be se
 
 ### Setting Up Admin Roles
 
-If you want to assign admin priviledges (have an admin that has edit/delete power over every post), you can navigate to `./server/main.js` and change the user id string to the user id you'd want to give these priviledges to. Note that user ids are generated automatically after you create an account, so you would have to grab that user id. I have the app set up so that you can navigate to `./imports/ui/pages/Home.jsx` and uncomment the console.log code which will reveal the currently logged-in user's userID.
+If you want to assign admin privileges (have an admin that has edit/delete power over every post), you can navigate to `./server/main.js` and change the user id string to the user id you'd want to give these privileges to. Note that user ids are generated automatically after you create an account, so you would have to grab that user id. I have the app set up so that you can navigate to `./imports/ui/pages/Home.jsx` and uncomment the console.log code which will reveal the currently logged-in user's userID.
 
