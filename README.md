@@ -28,3 +28,7 @@ Earlier dabblings of this (among other parts of the potential project) can be se
 
 * You can now run the app at localhost:3000 by entering `npm start` in the terminal while in the root directory.
 
+### Setting Up Admin Roles
+
+If you want to assign admin priviledges (have an admin that has edit/delete power over every post), you can navigate to `./server/main.js` and change the user id string to the user id you'd want to give these priviledges to. Note that user ids are generated automatically after you create an account, so you would have to grab that user id. I have the app set up so that you can navigate to `./imports/ui/pages/Home.jsx` and uncomment the console.log code which will reveal the currently logged-in user's userID.
+

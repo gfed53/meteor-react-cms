@@ -22,6 +22,11 @@ class Home extends Component {
   }
 
   componentDidMount(){
+    /*-----------------------------------------------------------
+      Uncomment this console.log if you want to detect the id of the currently logged-in user.
+      Use this id in './server/main.js' if you want to make this user an admin.
+    */
+    // console.log('Currently logged in userId:',Meteor.userId());
   }
 
   componentWillUpdate(){

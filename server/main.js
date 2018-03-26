@@ -4,7 +4,7 @@ import '../imports/api/posts.js';
 Meteor.startup(() => {
   // code to run on server at startup
 
-  // Give GregTheAdmin the 'admin' role
+  // Give this user the 'admin' role
   Roles.addUsersToRoles('WrtgdqtD659WbBzfy', 'admin', Roles.GLOBAL_GROUP);
 
   /*-----------------------------------------------------------
