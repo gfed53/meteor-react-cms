@@ -1,6 +1,19 @@
 .nav-container {
   margin-top: 1em;
-  text-align: right;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  .credits {
+    span {
+      margin: 0;
+      font-size: 0.9em;
+    }
+
+    a {
+      margin: 0 1em;
+    }
+  }
 }
 
 .header-logged-in {
