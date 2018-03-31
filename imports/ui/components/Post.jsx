@@ -4,7 +4,7 @@ import { stateToHTML } from 'draft-js-export-html';
 
 import MyEditor from './MyEditor.jsx';
 import PostEdit from './PostEdit.jsx';
-import { PostDisplay } from './PostDisplay';
+import PostDisplay from './PostDisplay';
 
 export default class Post extends Component {
 
@@ -69,7 +69,9 @@ export default class Post extends Component {
     } else {
       content = (
         <div>
-          <PostDisplay data={this.getDraftHtml(this.props.data.draft_content)} />     
+          <PostDisplay 
+          data={this.getDraftHtml(this.props.data.draft_content)}
+          draft_content={this.props.data.draft_content} />     
           {postButtons}
         </div>
       );
