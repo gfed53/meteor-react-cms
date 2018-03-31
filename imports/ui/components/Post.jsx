@@ -71,7 +71,8 @@ export default class Post extends Component {
         <div>
           <PostDisplay 
           data={this.getDraftHtml(this.props.data.draft_content)}
-          draft_content={this.props.data.draft_content} />     
+          draft_content={this.props.data.draft_content} 
+          />     
           {postButtons}
         </div>
       );

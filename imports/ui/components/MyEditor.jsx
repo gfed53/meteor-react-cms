@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
-import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
+import { EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
+import Editor from 'draft-js-plugins-editor';
+
 
 import { InlineStyleControls } from './InlineStyleControls.jsx';
 import { BlockStyleControls } from './BlockStyleControls.jsx';
 
+import createLinkifyPlugin from 'draft-js-linkify-plugin';
+
+import linkifyEditorState from './linkifyEditorState.js';
+
+
+const linkifyPlugin = createLinkifyPlugin({
+  target: '_blank'
+}
+);
 
 export default class MyEditor extends Component {
 
@@ -93,7 +104,18 @@ export default class MyEditor extends Component {
   // Extracts content from editorState, then converts it to raw, more easily storable object, which is then passed up to Home component and saved within data model (in Home state for now)
   _handleSave(){
     const content = this.state.editorState.getCurrentContent();
-    const raw = convertToRaw(content);
+    console.log('content',content);
+
+    const linkifiedEditorState = linkifyEditorState(this.state.editorState);
+    console.log('linkifiedEditorState',linkifiedEditorState);
+
+    const linkifiedContent = linkifiedEditorState.getCurrentContent();
+
+    console.log('linkifiedContent',linkifiedContent);
+
+    const raw = convertToRaw(linkifiedContent);
+    console.log('raw',raw);
+
 
     this.props.onSave(raw);
 
@@ -141,6 +163,7 @@ export default class MyEditor extends Component {
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.handleChange}
+          plugins={[linkifyPlugin]}
         />
         {controls}
       </div>

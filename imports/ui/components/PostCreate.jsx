@@ -13,6 +13,8 @@ export default class PostCreate extends Component {
 
   // For saving a new post
   handleSave(draftContent){
+
+    // console.log('draftContent',draftContent);
     const post = {
       // Anon for now if user is not logged in.
       author: 'Anon',
