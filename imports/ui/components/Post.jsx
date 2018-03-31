@@ -40,6 +40,23 @@ export default class Post extends Component {
     const content = convertFromRaw(raw),
           options = {
             defaultBlockTag: 'div',
+            // Convert link entities to have 'http://'-prefixed links, with 
+            entityStyleFn: (entity) => {
+              const entityType = entity.get('type').toLowerCase();
+              if (entityType === 'link') {
+                const data = entity.getData();
+                return {
+                  element: 'a',
+                  attributes: {
+                    target: '_blank',
+                    href: convertToValidLink(data.url),
+                  },
+                  style: {
+                    // Put styles here...
+                  },
+                };
+              }
+            },
           };
 
     return stateToHTML(content, options);
@@ -89,4 +106,13 @@ export default class Post extends Component {
       </div>
     );
   }
+}
+
+function convertToValidLink(link){
+  let httpRegex = /^https*:\/\/.+/g;
+  
+  return !httpRegex.test(link) ? 
+  `http://${link}` :
+  link;
+  
 }
