@@ -4,7 +4,7 @@ import { stateToHTML } from 'draft-js-export-html';
 
 import MyEditor from './MyEditor.jsx';
 import PostEdit from './PostEdit.jsx';
-import PostDisplay from './PostDisplay';
+import { PostDisplay } from './PostDisplay';
 
 export default class Post extends Component {
 
@@ -88,7 +88,6 @@ export default class Post extends Component {
         <div>
           <PostDisplay 
           data={this.getDraftHtml(this.props.data.draft_content)}
-          draft_content={this.props.data.draft_content} 
           />     
           {postButtons}
         </div>
@@ -108,6 +107,7 @@ export default class Post extends Component {
   }
 }
 
+// Won't have to worry about deeper validation like 'www.' and suffixes since linkify plugin takes care of that for us initially.
 function convertToValidLink(link){
   let httpRegex = /^https*:\/\/.+/g;
   
