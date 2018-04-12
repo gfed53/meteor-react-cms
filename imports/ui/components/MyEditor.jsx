@@ -29,6 +29,13 @@ export default class MyEditor extends Component {
     */
     this.state = {editorState: EditorState.createEmpty()};
 
+
+    this.editorStateInput = null;
+
+    this.setEditorStateInputRef = element => {
+      this.editorStateInput = element;
+    }
+
     this.handleChange = (editorState) => {
       this.setState({editorState});
       const content = this.state.editorState.getCurrentContent();
@@ -56,6 +63,10 @@ export default class MyEditor extends Component {
         editorState: EditorState.createWithContent(content)
       });
 
+    }
+
+    if(this.props.shouldAutofocus){
+      this.editorStateInput.focus();
     }
   }
 
@@ -160,6 +171,7 @@ export default class MyEditor extends Component {
         </div>
       </div>
         <Editor 
+          ref={this.setEditorStateInputRef}
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.handleChange}
