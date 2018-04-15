@@ -13,21 +13,72 @@ export default class AccountsUIWrapper extends Component {
 
     // Fix for tab accessibility
     setTimeout(() => {
-      console.log(document.querySelectorAll('.login-link-text'));
-      let linkEls = document.querySelectorAll('.login-link-text');
 
-      linkEls.forEach((el) => {
-        console.log('el',el);
-        el.setAttribute('href','');
-        el.setAttribute('tabIndex',0);
+      console.log($('.login-link-and-dropdown-list a'));
+
+      setDropDownLinkAccessible();
+
+      function setDropDownLinkAccessible() {
+        console.log('setDropDownLinkAccessible');
+
+        setTimeout(() => {
+          $('.login-link-and-dropdown-list a').attr({
+            href: '',
+            tabIndex: 0
+          });
+        }, 1000);
+      }
+      
+
+      // Focus
+      $('.nav-container').on('click', '.login-link-text', function(e) {
+        console.log('clicked login-link-text');
+
+        handleDropdown();
+
+        function handleDropdown(){
+          setTimeout(() => { 
+            console.log($('.login-link-and-dropdown-list .accounts-dialog'));
+            let $accountsDialog = $('.login-link-and-dropdown-list .accounts-dialog');
+
+            if($accountsDialog.length){
+
+              // console.log($('.login-link-and-dropdown-list .accounts-dialog:first-child'));
+              console.log($('.login-close-text'));
+
+              $('.login-link-and-dropdown-list .accounts-dialog .login-button, a').attr({
+                href: '',
+                tabIndex: 0
+              });
+
+              $(`
+                .login-link-and-dropdown-list .accounts-dialog .login-button,
+                .login-link-and-dropdown-list .accounts-dialog input
+              `).on('keydown', function(e) {
+                if(e.which === 13){
+                  console.log('you hit enter while on element',$(this));
+                  $(this).trigger('click');
+
+                  // recursive
+                  handleDropdown();
+                  setDropDownLinkAccessible();
+                }
+              })
+
+              $('.login-close-text').focus();
+
+              setFocusBoundary($('.login-link-and-dropdown-list .accounts-dialog'), () => {
+                console.log('should close on ESC');
+                setDropDownLinkAccessible();
+              });
+          }
+
+
+          },0);
+
+        }
       });
 
-      // Focus test
-      $('.login-link-text').on('click', function(e) {
-        console.log('clicked login-link-text');
-      })
-
-      // Init keyboard trap
 
 
 
@@ -46,4 +97,57 @@ export default class AccountsUIWrapper extends Component {
 }
 
 
-// Function for keyboard trap down here?
+// Function for keyboard trap down here
+
+function setFocusBoundary(parentEl, onRevert) {
+  let element = parentEl[0],
+  focusableEls = element.querySelectorAll('a[href], area[href], div, input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]');
+
+  parentEl.on('keydown', (e) => {
+    handleKeyDown(focusableEls, e, onRevert);
+  });
+}
+
+function handleKeyDown(focusableEls, e, closeCB) {
+  
+  let KEY_TAB = 9,
+      KEY_ESC = 27,
+      firstFocusableEl = focusableEls[0],
+      lastFocusableEl = focusableEls[focusableEls.length - 1];
+
+  function handleBackwardTab() {
+    if ( document.activeElement === firstFocusableEl ) {
+      e.preventDefault();
+      lastFocusableEl.focus();
+    }
+  }
+  function handleForwardTab() {
+    if ( document.activeElement === lastFocusableEl ) {
+      e.preventDefault();
+      firstFocusableEl.focus();
+    }
+  }
+
+  switch(e.keyCode) {
+    case KEY_TAB:
+      if ( focusableEls.length === 1 ) {
+        e.preventDefault();
+        break;
+      } 
+
+      if ( e.shiftKey ) {
+        handleBackwardTab();
+      } else {
+        handleForwardTab();
+      }
+    
+      break;
+
+    case KEY_ESC:
+      closeCB();
+      break;
+      
+    default:
+      break;
+  } // end switch
+}
