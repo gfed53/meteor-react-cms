@@ -14,12 +14,9 @@ export default class AccountsUIWrapper extends Component {
     // Fix for tab accessibility
     setTimeout(() => {
 
-      console.log($('.login-link-and-dropdown-list a'));
-
       setDropDownLinkAccessible();
 
       function setDropDownLinkAccessible() {
-        console.log('setDropDownLinkAccessible');
 
         setTimeout(() => {
           $('.login-link-and-dropdown-list a').attr({
@@ -32,31 +29,24 @@ export default class AccountsUIWrapper extends Component {
 
       // Focus
       $('.nav-container').on('click', '.login-link-text', function(e) {
-        console.log('clicked login-link-text');
 
         handleDropdown();
 
         function handleDropdown(){
           setTimeout(() => { 
-            console.log($('.login-link-and-dropdown-list .accounts-dialog'));
             let $accountsDialog = $('.login-link-and-dropdown-list .accounts-dialog');
 
             if($accountsDialog.length){
 
-              // console.log($('.login-link-and-dropdown-list .accounts-dialog:first-child'));
-              console.log($('.login-close-text'));
-
-              $('.login-link-and-dropdown-list .accounts-dialog .login-button, a').attr({
+              // Make these children tab-accessible
+              $accountsDialog.children('.login-button, a').attr({
                 href: '',
                 tabIndex: 0
               });
-
-              $(`
-                .login-link-and-dropdown-list .accounts-dialog .login-button,
-                .login-link-and-dropdown-list .accounts-dialog input
-              `).on('keydown', function(e) {
+              
+              // Allow 'enter' key to trigger what mouse click would trigger
+              $accountsDialog.find('.login-button, input').on('keydown', function(e) {
                 if(e.which === 13){
-                  console.log('you hit enter while on element',$(this));
                   $(this).trigger('click');
 
                   // recursive
@@ -68,11 +58,9 @@ export default class AccountsUIWrapper extends Component {
               $('.login-close-text').focus();
 
               setFocusBoundary($('.login-link-and-dropdown-list .accounts-dialog'), () => {
-                console.log('should close on ESC');
                 setDropDownLinkAccessible();
               });
           }
-
 
           },0);
 

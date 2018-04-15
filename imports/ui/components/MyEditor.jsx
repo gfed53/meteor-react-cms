@@ -115,18 +115,12 @@ export default class MyEditor extends Component {
   // Extracts content from editorState, then converts it to raw, more easily storable object, which is then passed up to Home component and saved within data model (in Home state for now)
   _handleSave(){
     const content = this.state.editorState.getCurrentContent();
-    console.log('content',content);
 
     const linkifiedEditorState = linkifyEditorState(this.state.editorState);
-    console.log('linkifiedEditorState',linkifiedEditorState);
 
     const linkifiedContent = linkifiedEditorState.getCurrentContent();
 
-    console.log('linkifiedContent',linkifiedContent);
-
     const raw = convertToRaw(linkifiedContent);
-    console.log('raw',raw);
-
 
     this.props.onSave(raw);
 
