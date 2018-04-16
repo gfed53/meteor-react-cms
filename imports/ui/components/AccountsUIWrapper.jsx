@@ -23,7 +23,7 @@ export default class AccountsUIWrapper extends Component {
             href: '',
             tabIndex: 0
           });
-        }, 1000);
+        }, 500);
       }
       
 
@@ -37,15 +37,15 @@ export default class AccountsUIWrapper extends Component {
             let $accountsDialog = $('.login-link-and-dropdown-list .accounts-dialog');
 
             if($accountsDialog.length){
-
+  
               // Make these children tab-accessible
-              $accountsDialog.children('.login-button, a').attr({
+              $accountsDialog.find('.login-button, a').attr({
                 href: '',
                 tabIndex: 0
               });
               
               // Allow 'enter' key to trigger what mouse click would trigger
-              $accountsDialog.find('.login-button, input').on('keydown', function(e) {
+              $accountsDialog.find('.login-button, input, a').on('keydown', function(e) {
                 if(e.which === 13){
                   $(this).trigger('click');
 
@@ -71,7 +71,7 @@ export default class AccountsUIWrapper extends Component {
 
 
 
-    },1000);
+    },500);
 
   }
   componentWillUnmount() {
