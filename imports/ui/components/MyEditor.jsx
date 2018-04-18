@@ -16,7 +16,10 @@ const linkifyPlugin = createLinkifyPlugin({
 }
 );
 
-const tabCharacter = '	';
+// Actual tab
+// const tabCharacter = '	';
+// Spaces
+const tabCharacter = '    ';
 const keyMap = {};
 
 export default class MyEditor extends Component {
@@ -90,7 +93,6 @@ export default class MyEditor extends Component {
   _onTab(e) {
     if(keyMap[39]){
       e.preventDefault();
-      // console.log('tab action');
 
       let currentState = this.state.editorState;
       let newContentState = Modifier.replaceText(
@@ -102,10 +104,10 @@ export default class MyEditor extends Component {
       this.setState({ 
         editorState: EditorState.push(currentState, newContentState, 'insert-characters')
       });
-
-      // keyMap[39] = false;
+    } else {
+      // For nested lists
+      this.handleChange(RichUtils.onTab(e, this.state.editorState, 6));
     }
-    
   }
 
   // _onBoldClick() {
@@ -206,6 +208,7 @@ export default class MyEditor extends Component {
 
 /*-----------------------------------------------------------
   Enable tabbing within editor when the user holds down right arrow.
+  Tabs don't actually get saved within editor state though. Maybe find a way to do this? Is there at this point?
 */
 document.addEventListener('keydown', function(e) {
   if(e.which === 39){
