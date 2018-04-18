@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
+import { EditorState, RichUtils, Modifier, convertToRaw, convertFromRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 
 
@@ -15,6 +15,9 @@ const linkifyPlugin = createLinkifyPlugin({
   target: '_blank'
 }
 );
+
+const tabCharacter = '	';
+const keyMap = {};
 
 export default class MyEditor extends Component {
 
@@ -46,7 +49,8 @@ export default class MyEditor extends Component {
     };
 
     this.handleKeyCommand = this._handleKeyCommand.bind(this);
-    this.onBoldClick = this._onBoldClick.bind(this);
+    this.onTab = this._onTab.bind(this);
+    // this.onBoldClick = this._onBoldClick.bind(this);
     this.handleSave = this._handleSave.bind(this);
 
     this.toggleBlockType = this._toggleBlockType.bind(this);
@@ -83,16 +87,37 @@ export default class MyEditor extends Component {
     return 'not-handled';
   }
 
-  _onBoldClick() {
-    const newState = RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD');
-    this.logState(newState);
+  _onTab(e) {
+    if(keyMap[39]){
+      e.preventDefault();
+      // console.log('tab action');
 
-    if(newState) {
-      this.handleChange(newState);
-      return 'handled';
+      let currentState = this.state.editorState;
+      let newContentState = Modifier.replaceText(
+        currentState.getCurrentContent(),
+        currentState.getSelection(),
+        tabCharacter
+      );
+  
+      this.setState({ 
+        editorState: EditorState.push(currentState, newContentState, 'insert-characters')
+      });
+
+      // keyMap[39] = false;
     }
-    return 'not-handled';
+    
   }
+
+  // _onBoldClick() {
+  //   const newState = RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD');
+  //   this.logState(newState);
+
+  //   if(newState) {
+  //     this.handleChange(newState);
+  //     return 'handled';
+  //   }
+  //   return 'not-handled';
+  // }
 
   _toggleBlockType(blockType) {
     this.handleChange(
@@ -169,6 +194,7 @@ export default class MyEditor extends Component {
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.handleChange}
+          onTab={this.onTab}
           plugins={[linkifyPlugin]}
         />
         {controls}
@@ -176,3 +202,21 @@ export default class MyEditor extends Component {
     );
   }
 }
+
+
+/*-----------------------------------------------------------
+  Enable tabbing within editor when the user holds down right arrow.
+*/
+document.addEventListener('keydown', function(e) {
+  if(e.which === 39){
+    // console.log('right arrow key ON');
+    keyMap[e.which] = true;
+  }
+});
+
+document.addEventListener('keyup', function(e) {
+  if(e.which === 39){
+    // console.log('right arrow key OFF');
+    keyMap[e.which] = false;
+  }
+});
