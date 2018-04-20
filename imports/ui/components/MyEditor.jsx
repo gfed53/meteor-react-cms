@@ -208,7 +208,8 @@ export default class MyEditor extends Component {
 
 /*-----------------------------------------------------------
   Enable tabbing within editor when the user holds down right arrow.
-  Tabs don't actually get saved within editor state though. Maybe find a way to do this? Is there at this point?
+  Tabs don't actually get saved within editor state. Spaces do, though.
+  TODO: find a key that wouldn't conflict. This does if there's existing text to the right of the current line.
 */
 document.addEventListener('keydown', function(e) {
   if(e.which === 39){

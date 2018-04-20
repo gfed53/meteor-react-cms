@@ -17,9 +17,9 @@ export default class StyleButton extends Component {
     }
 
     return (
-      <span className={className} onMouseDown={this.onToggle}>
+      <button className={className} onClick={this.onToggle}>
         {this.props.label}
-      </span>
+      </button>
     );
   }
 }
