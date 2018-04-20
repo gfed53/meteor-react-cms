@@ -71,10 +71,7 @@ export default class MyEditor extends Component {
       });
 
     }
-
-    if(this.props.shouldAutofocus){
-      this.editorStateInput.focus();
-    }
+    this.editorStateInput.focus();
   }
 
   componentWillReceiveProps(nextProps){

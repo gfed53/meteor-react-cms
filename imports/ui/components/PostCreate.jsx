@@ -26,16 +26,11 @@ export default class PostCreate extends Component {
     this.props.onSave(post);
   }
 
-  // componentDidMount(){
-    
-  // }
-
-
   render() {
     return (
       <div className="post-create-main">
         Create A New Post!
-        <MyEditor shouldAutofocus={true} onSave={this.handleSave} />
+        <MyEditor onSave={this.handleSave} />
       </div>
     );
   }
