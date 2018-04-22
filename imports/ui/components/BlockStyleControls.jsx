@@ -37,5 +37,3 @@ export const BlockStyleControls = (props) => {
     </div>
   );
 };
-
-// RichEditor-controls 

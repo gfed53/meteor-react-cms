@@ -18,6 +18,7 @@ const linkifyPlugin = createLinkifyPlugin({
 
 // Actual tab
 // const tabCharacter = '	';
+
 // Spaces
 const tabCharacter = '    ';
 const keyMap = {};
@@ -53,7 +54,6 @@ export default class MyEditor extends Component {
 
     this.handleKeyCommand = this._handleKeyCommand.bind(this);
     this.onTab = this._onTab.bind(this);
-    // this.onBoldClick = this._onBoldClick.bind(this);
     this.handleSave = this._handleSave.bind(this);
 
     this.toggleBlockType = this._toggleBlockType.bind(this);
@@ -106,17 +106,6 @@ export default class MyEditor extends Component {
       this.handleChange(RichUtils.onTab(e, this.state.editorState, 6));
     }
   }
-
-  // _onBoldClick() {
-  //   const newState = RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD');
-  //   this.logState(newState);
-
-  //   if(newState) {
-  //     this.handleChange(newState);
-  //     return 'handled';
-  //   }
-  //   return 'not-handled';
-  // }
 
   _toggleBlockType(blockType) {
     this.handleChange(
@@ -207,17 +196,16 @@ export default class MyEditor extends Component {
   Enable tabbing within editor when the user holds down right arrow.
   Tabs don't actually get saved within editor state. Spaces do, though.
   TODO: find a key that wouldn't conflict. This does if there's existing text to the right of the current line.
+  Maybe instead find a way to create a tab when user types out a special string, like '\tab'.
 */
 document.addEventListener('keydown', function(e) {
   if(e.which === 39){
-    // console.log('right arrow key ON');
     keyMap[e.which] = true;
   }
 });
 
 document.addEventListener('keyup', function(e) {
   if(e.which === 39){
-    // console.log('right arrow key OFF');
     keyMap[e.which] = false;
   }
 });

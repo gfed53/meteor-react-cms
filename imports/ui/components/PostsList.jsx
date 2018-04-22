@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { CSSTransitionGroup } from 'react-transition-group';
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Post from './Post.jsx';
 
@@ -25,20 +24,3 @@ export default class PostsList extends Component {
     );
   }
 }
-
-// export const PostsList = (props) => {
-//   const posts = props.posts.map((post) => (
-//     <Post key={post._id} onSave={props.onSave} onDelete={props.onDelete} data={post} />
-//   ));
-
-//   return (
-//     <div>
-//       <CSSTransitionGroup
-//         transitionName="example"
-//         transitionEnterTimeout={500}
-//         transitionLeaveTimeout={300}>
-//         {posts}
-//       </CSSTransitionGroup>
-//     </div>
-//   );
-// }
