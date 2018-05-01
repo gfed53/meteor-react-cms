@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { EditorState, RichUtils, Modifier, convertToRaw, convertFromRaw } from 'draft-js';
+import { EditorState, SelectionState, RichUtils, Modifier, convertToRaw, convertFromRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 
 
@@ -37,9 +37,9 @@ export default class MyEditor extends Component {
     this.state = {editorState: EditorState.createEmpty()};
 
 
-    // this.editorStateInput = null;
+    this.editorStateInput;
 
-    this.setEditorStateInputRef = element => {
+    this.setEditorStateInputRef = (element) => {
       this.editorStateInput = element;
     }
 
@@ -62,25 +62,27 @@ export default class MyEditor extends Component {
   }
 
   componentDidMount(){
-    
 
     if(this.props.draft_content){
-
-      console.log('props content',this.props.draft_content);
 
       const content = convertFromRaw(this.props.draft_content);
       const existing_state = EditorState.createWithContent(content);
 
-      console.log('content',content);
-
-      console.log('existing_state',existing_state);
+      // const state_with_cursor_at_end = moveSelectionToEnd(existing_state);
 
       this.setState({
-        editorState: EditorState.createWithContent(content)
+        editorState: existing_state
       });
 
+      // Triggering focus() causes inner content to not render??
+      // this.editorStateInput.focus();
+
+      // setTimeout(() => {console.log('this.editorStateInput',this.editorStateInput);}, 0);
+
+    } else {
+      this.editorStateInput.focus();
     }
-    // this.editorStateInput.focus();
+    
   }
 
   componentWillReceiveProps(nextProps){
@@ -187,7 +189,7 @@ export default class MyEditor extends Component {
         </div>
       </div>
         <Editor 
-          // ref={this.setEditorStateInputRef}
+          ref={this.setEditorStateInputRef}
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.handleChange}
@@ -218,3 +220,21 @@ document.addEventListener('keyup', function(e) {
     keyMap[e.which] = false;
   }
 });
+
+// This may be useful..
+function moveSelectionToEnd(editorState) {
+  const content = editorState.getCurrentContent();
+  const blockMap = content.getBlockMap();
+
+  const key = blockMap.last().getKey();
+  const length = blockMap.last().getLength();
+
+  const selection = new SelectionState({
+    anchorKey: key,
+    anchorOffset: length,
+    focusKey: key,
+    focusOffset: length,
+  });
+
+  return EditorState.acceptSelection(editorState, selection);
+};
