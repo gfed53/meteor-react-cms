@@ -37,7 +37,7 @@ export default class MyEditor extends Component {
     this.state = {editorState: EditorState.createEmpty()};
 
 
-    this.editorStateInput = null;
+    // this.editorStateInput = null;
 
     this.setEditorStateInputRef = element => {
       this.editorStateInput = element;
@@ -62,16 +62,25 @@ export default class MyEditor extends Component {
   }
 
   componentDidMount(){
+    
+
     if(this.props.draft_content){
+
+      console.log('props content',this.props.draft_content);
+
       const content = convertFromRaw(this.props.draft_content);
       const existing_state = EditorState.createWithContent(content);
+
+      console.log('content',content);
+
+      console.log('existing_state',existing_state);
 
       this.setState({
         editorState: EditorState.createWithContent(content)
       });
 
     }
-    this.editorStateInput.focus();
+    // this.editorStateInput.focus();
   }
 
   componentWillReceiveProps(nextProps){
@@ -178,7 +187,7 @@ export default class MyEditor extends Component {
         </div>
       </div>
         <Editor 
-          ref={this.setEditorStateInputRef}
+          // ref={this.setEditorStateInputRef}
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.handleChange}
