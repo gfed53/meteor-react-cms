@@ -34,7 +34,10 @@ export default class MyEditor extends Component {
 
       Else, we just use createEmpty().
     */
-    this.state = {editorState: EditorState.createEmpty()};
+    this.state = {
+      editorState: EditorState.createEmpty(),
+      inputIsFocused: false
+    };
 
 
     this.editorStateInput;
@@ -44,12 +47,35 @@ export default class MyEditor extends Component {
     }
 
     this.handleChange = (editorState) => {
+      const currentContentState = this.state.editorState.getCurrentContent();
+      const newContentState = editorState.getCurrentContent();
       this.setState({editorState});
-      const content = this.state.editorState.getCurrentContent();
+
+      console.log('this in handleChange',this);
+
+      console.log('this.editorStateInput',this.editorStateInput);
+
+      if(this.editorStateInput && !this.state.inputIsFocused){
+        console.log('hey');
+        this.setState({
+          inputIsFocused: true
+        });
+
+        // this.editorStateInput.focus();
+
+      }
+
+
+      if(currentContentState !== newContentState){
+        console.log('!==');
+        
+      } else {
+        console.log('===');
+      }
     };
 
     this.logState = (editorState) => {
-      const content = editorState.getCurrentContent();
+      const currentContentState = editorState.getCurrentContent();
     };
 
     this.handleKeyCommand = this._handleKeyCommand.bind(this);
@@ -63,6 +89,8 @@ export default class MyEditor extends Component {
 
   componentDidMount(){
 
+    console.log('this in componentDidMount',this);
+
     if(this.props.draft_content){
 
       const content = convertFromRaw(this.props.draft_content);
@@ -74,14 +102,9 @@ export default class MyEditor extends Component {
         editorState: existing_state
       });
 
-      // Triggering focus() causes inner content to not render??
-      // this.editorStateInput.focus();
-
-      // setTimeout(() => {console.log('this.editorStateInput',this.editorStateInput);}, 0);
-
-    } else {
-      this.editorStateInput.focus();
     }
+
+    setTimeout(() => {this.editorStateInput.focus()}, 0);
     
   }
 
@@ -99,23 +122,23 @@ export default class MyEditor extends Component {
   }
 
   _onTab(e) {
-    if(keyMap[39]){
-      e.preventDefault();
+    // if(keyMap[39]){
+    //   e.preventDefault();
 
-      let currentState = this.state.editorState;
-      let newContentState = Modifier.replaceText(
-        currentState.getCurrentContent(),
-        currentState.getSelection(),
-        tabCharacter
-      );
+    //   let currentState = this.state.editorState;
+    //   let newContentState = Modifier.replaceText(
+    //     currentState.getCurrentContent(),
+    //     currentState.getSelection(),
+    //     tabCharacter
+    //   );
   
-      this.setState({ 
-        editorState: EditorState.push(currentState, newContentState, 'insert-characters')
-      });
-    } else {
+    //   this.setState({ 
+    //     editorState: EditorState.push(currentState, newContentState, 'insert-characters')
+    //   });
+    // } else {
       // For nested lists
       this.handleChange(RichUtils.onTab(e, this.state.editorState, 6));
-    }
+    // }
   }
 
   _toggleBlockType(blockType) {
@@ -209,32 +232,32 @@ export default class MyEditor extends Component {
   TODO: find a key that wouldn't conflict. This does if there's existing text to the right of the current line.
   Maybe instead find a way to create a tab when user types out a special string, like '\tab'.
 */
-document.addEventListener('keydown', function(e) {
-  if(e.which === 39){
-    keyMap[e.which] = true;
-  }
-});
+// document.addEventListener('keydown', function(e) {
+//   if(e.which === 39){
+//     keyMap[e.which] = true;
+//   }
+// });
 
-document.addEventListener('keyup', function(e) {
-  if(e.which === 39){
-    keyMap[e.which] = false;
-  }
-});
+// document.addEventListener('keyup', function(e) {
+//   if(e.which === 39){
+//     keyMap[e.which] = false;
+//   }
+// });
 
 // This may be useful..
-function moveSelectionToEnd(editorState) {
-  const content = editorState.getCurrentContent();
-  const blockMap = content.getBlockMap();
+// function moveSelectionToEnd(editorState) {
+//   const content = editorState.getCurrentContent();
+//   const blockMap = content.getBlockMap();
 
-  const key = blockMap.last().getKey();
-  const length = blockMap.last().getLength();
+//   const key = blockMap.last().getKey();
+//   const length = blockMap.last().getLength();
 
-  const selection = new SelectionState({
-    anchorKey: key,
-    anchorOffset: length,
-    focusKey: key,
-    focusOffset: length,
-  });
+//   const selection = new SelectionState({
+//     anchorKey: key,
+//     anchorOffset: length,
+//     focusKey: key,
+//     focusOffset: length,
+//   });
 
-  return EditorState.acceptSelection(editorState, selection);
-};
+//   return EditorState.acceptSelection(editorState, selection);
+// };
