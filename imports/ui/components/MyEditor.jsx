@@ -96,10 +96,10 @@ export default class MyEditor extends Component {
       const content = convertFromRaw(this.props.draft_content);
       const existing_state = EditorState.createWithContent(content);
 
-      // const state_with_cursor_at_end = moveSelectionToEnd(existing_state);
+      const state_with_cursor_at_end = moveSelectionToEnd(existing_state);
 
       this.setState({
-        editorState: existing_state
+        editorState: state_with_cursor_at_end
       });
 
     }
@@ -122,23 +122,23 @@ export default class MyEditor extends Component {
   }
 
   _onTab(e) {
-    // if(keyMap[39]){
-    //   e.preventDefault();
+    if(keyMap[39]){
+      e.preventDefault();
 
-    //   let currentState = this.state.editorState;
-    //   let newContentState = Modifier.replaceText(
-    //     currentState.getCurrentContent(),
-    //     currentState.getSelection(),
-    //     tabCharacter
-    //   );
+      let currentState = this.state.editorState;
+      let newContentState = Modifier.replaceText(
+        currentState.getCurrentContent(),
+        currentState.getSelection(),
+        tabCharacter
+      );
   
-    //   this.setState({ 
-    //     editorState: EditorState.push(currentState, newContentState, 'insert-characters')
-    //   });
-    // } else {
+      this.setState({ 
+        editorState: EditorState.push(currentState, newContentState, 'insert-characters')
+      });
+    } else {
       // For nested lists
       this.handleChange(RichUtils.onTab(e, this.state.editorState, 6));
-    // }
+    }
   }
 
   _toggleBlockType(blockType) {
@@ -232,32 +232,31 @@ export default class MyEditor extends Component {
   TODO: find a key that wouldn't conflict. This does if there's existing text to the right of the current line.
   Maybe instead find a way to create a tab when user types out a special string, like '\tab'.
 */
-// document.addEventListener('keydown', function(e) {
-//   if(e.which === 39){
-//     keyMap[e.which] = true;
-//   }
-// });
+document.addEventListener('keydown', function(e) {
+  if(e.which === 39){
+    keyMap[e.which] = true;
+  }
+});
 
-// document.addEventListener('keyup', function(e) {
-//   if(e.which === 39){
-//     keyMap[e.which] = false;
-//   }
-// });
+document.addEventListener('keyup', function(e) {
+  if(e.which === 39){
+    keyMap[e.which] = false;
+  }
+});
 
-// This may be useful..
-// function moveSelectionToEnd(editorState) {
-//   const content = editorState.getCurrentContent();
-//   const blockMap = content.getBlockMap();
+function moveSelectionToEnd(editorState) {
+  const content = editorState.getCurrentContent();
+  const blockMap = content.getBlockMap();
 
-//   const key = blockMap.last().getKey();
-//   const length = blockMap.last().getLength();
+  const key = blockMap.last().getKey();
+  const length = blockMap.last().getLength();
 
-//   const selection = new SelectionState({
-//     anchorKey: key,
-//     anchorOffset: length,
-//     focusKey: key,
-//     focusOffset: length,
-//   });
+  const selection = new SelectionState({
+    anchorKey: key,
+    anchorOffset: length,
+    focusKey: key,
+    focusOffset: length,
+  });
 
-//   return EditorState.acceptSelection(editorState, selection);
-// };
+  return EditorState.acceptSelection(editorState, selection);
+};
