@@ -35,8 +35,7 @@ export default class MyEditor extends Component {
       Else, we just use createEmpty().
     */
     this.state = {
-      editorState: EditorState.createEmpty(),
-      inputIsFocused: false
+      editorState: EditorState.createEmpty()
     };
 
 
@@ -47,31 +46,9 @@ export default class MyEditor extends Component {
     }
 
     this.handleChange = (editorState) => {
-      const currentContentState = this.state.editorState.getCurrentContent();
-      const newContentState = editorState.getCurrentContent();
+      // const currentContentState = this.state.editorState.getCurrentContent();
+      // const newContentState = editorState.getCurrentContent();
       this.setState({editorState});
-
-      console.log('this in handleChange',this);
-
-      console.log('this.editorStateInput',this.editorStateInput);
-
-      if(this.editorStateInput && !this.state.inputIsFocused){
-        console.log('hey');
-        this.setState({
-          inputIsFocused: true
-        });
-
-        // this.editorStateInput.focus();
-
-      }
-
-
-      if(currentContentState !== newContentState){
-        console.log('!==');
-        
-      } else {
-        console.log('===');
-      }
     };
 
     this.logState = (editorState) => {
@@ -89,8 +66,6 @@ export default class MyEditor extends Component {
 
   componentDidMount(){
 
-    console.log('this in componentDidMount',this);
-
     if(this.props.draft_content){
 
       const content = convertFromRaw(this.props.draft_content);
@@ -104,6 +79,7 @@ export default class MyEditor extends Component {
 
     }
 
+    // Wait a tick, or else draft content won't render in view
     setTimeout(() => {this.editorStateInput.focus()}, 0);
     
   }
