@@ -45,22 +45,12 @@ export default class MyEditor extends Component {
       this.editorStateInput = element;
     }
 
-    this.handleChange = (editorState) => {
-      // const currentContentState = this.state.editorState.getCurrentContent();
-      // const newContentState = editorState.getCurrentContent();
-      this.setState({editorState});
-    };
-
-    this.logState = (editorState) => {
-      const currentContentState = editorState.getCurrentContent();
-    };
-
     this.handleKeyCommand = this._handleKeyCommand.bind(this);
+    this.onChange = this._onChange.bind(this);
     this.onTab = this._onTab.bind(this);
-    this.handleSave = this._handleSave.bind(this);
-
     this.toggleBlockType = this._toggleBlockType.bind(this);
     this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
+    this.handleSave = this._handleSave.bind(this);
 
   }
 
@@ -91,10 +81,14 @@ export default class MyEditor extends Component {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     
     if (newState) {
-      this.handleChange(newState);
+      this.onChange(newState);
       return 'handled';
     }
     return 'not-handled';
+  }
+
+  _onChange(editorState){
+    this.setState({editorState});
   }
 
   _onTab(e) {
@@ -113,12 +107,12 @@ export default class MyEditor extends Component {
       });
     } else {
       // For nested lists
-      this.handleChange(RichUtils.onTab(e, this.state.editorState, 6));
+      this.onChange(RichUtils.onTab(e, this.state.editorState, 6));
     }
   }
 
   _toggleBlockType(blockType) {
-    this.handleChange(
+    this.onChange(
       RichUtils.toggleBlockType(
         this.state.editorState,
         blockType
@@ -127,7 +121,7 @@ export default class MyEditor extends Component {
   }
 
   _toggleInlineStyle(inlineStyle) {
-    this.handleChange(
+    this.onChange(
       RichUtils.toggleInlineStyle(
         this.state.editorState,
         inlineStyle
@@ -138,11 +132,8 @@ export default class MyEditor extends Component {
   // Extracts content from editorState, then converts it to raw, more easily storable object, which is then passed up to Home component and saved within data model (in Home state for now)
   _handleSave(){
     const content = this.state.editorState.getCurrentContent();
-
     const linkifiedEditorState = linkifyEditorState(this.state.editorState);
-
     const linkifiedContent = linkifiedEditorState.getCurrentContent();
-
     const raw = convertToRaw(linkifiedContent);
 
     this.props.onSave(raw);
@@ -191,7 +182,7 @@ export default class MyEditor extends Component {
           ref={this.setEditorStateInputRef}
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
-          onChange={this.handleChange}
+          onChange={this.onChange}
           onTab={this.onTab}
           plugins={[linkifyPlugin]}
         />
@@ -205,8 +196,8 @@ export default class MyEditor extends Component {
 /*-----------------------------------------------------------
   Enable tabbing within editor when the user holds down right arrow.
   Tabs don't actually get saved within editor state. Spaces do, though.
-  TODO: find a key that wouldn't conflict. This does if there's existing text to the right of the current line.
-  Maybe instead find a way to create a tab when user types out a special string, like '\tab'.
+  TODO: find a key that wouldn't conflict. This does if there's existing text to the right of the current line. Maybe ALT+SHIFT+TAB
+  Or, maybe instead find a way to create a tab when user types out a special string, like '\tab'.
 */
 document.addEventListener('keydown', function(e) {
   if(e.which === 39){
@@ -223,7 +214,6 @@ document.addEventListener('keyup', function(e) {
 function moveSelectionToEnd(editorState) {
   const content = editorState.getCurrentContent();
   const blockMap = content.getBlockMap();
-
   const key = blockMap.last().getKey();
   const length = blockMap.last().getLength();
 
