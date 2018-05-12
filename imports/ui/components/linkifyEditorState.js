@@ -36,7 +36,9 @@ const linkifyEditorState = (editorState) => {
                                       .set('anchorOffset', start)
                                       .set('focusOffset', end)
       const linkText = plainText.substring(start, end)
-      const entityKey = Entity.create('LINK', 'IMMUTABLE', { url: linkText })
+      const contentStateWithEntity = contentState.createEntity('LINK', 'IMMUTABLE', { url: linkText })
+      const entityKey = contentStateWithEntity.getLastCreatedEntityKey()
+
       newContentState = Modifier.replaceText(
         newContentState,
         selection,
