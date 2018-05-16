@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { convertFromRaw } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 
@@ -6,7 +7,7 @@ import MyEditor from './MyEditor.jsx';
 import PostEdit from './PostEdit.jsx';
 import { PostDisplay } from './PostDisplay';
 
-export default class Post extends Component {
+class Post extends Component {
 
   constructor(props) {
     super(props);
@@ -106,6 +107,14 @@ export default class Post extends Component {
     );
   }
 }
+
+Post.propTypes = {
+  onSave: PropTypes.func,
+  onDelete: PropTypes.func,
+  data: PropTypes.object
+}
+
+export default Post;
 
 // Won't have to worry about deeper validation like 'www.' and suffixes since linkify plugin takes care of that for us initially.
 function convertToValidLink(link){

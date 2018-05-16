@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 
 import vex from 'vex-js';
@@ -77,6 +78,11 @@ class Home extends Component {
       </div>
     );
   }
+}
+
+Home.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object),
+  currentUser: PropTypes.object
 }
 
 export default withTracker(() => {

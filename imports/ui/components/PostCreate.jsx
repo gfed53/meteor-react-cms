@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import MyEditor from './MyEditor.jsx';
 
 // Component in charge of creating a new post from scratch. 
-export default class PostCreate extends Component {
+class PostCreate extends Component {
 
   constructor(props){
     super(props);
@@ -34,3 +35,9 @@ export default class PostCreate extends Component {
     );
   }
 }
+
+PostCreate.propTypes = {
+  onSave: PropTypes.func
+}
+
+export default PostCreate;

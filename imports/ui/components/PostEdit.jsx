@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import MyEditor from './MyEditor.jsx';
 
 // Component in charge of editing an existing post. Once editing, user can either save changes or cancel out.
-export default class PostEdit extends Component {
+class PostEdit extends Component {
 
   constructor(props) {
     super(props);
@@ -34,3 +35,12 @@ export default class PostEdit extends Component {
   }
 
 }
+
+PostEdit.propTypes = {
+  post_id: PropTypes.number,
+  onSave: PropTypes.func,
+  onClose: PropTypes.func,
+  draft_content: PropTypes.object
+}
+
+export default PostEdit;

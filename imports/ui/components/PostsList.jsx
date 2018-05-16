@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { CSSTransitionGroup } from 'react-transition-group';
 
 import Post from './Post.jsx';
 
 
-export default class PostsList extends Component {
+class PostsList extends Component {
 
   render(){
     const posts = this.props.posts.map((post) => (
@@ -24,3 +25,11 @@ export default class PostsList extends Component {
     );
   }
 }
+
+PostsList.propTypes = {
+  onSave: PropTypes.func,
+  onDelete: PropTypes.func,
+  posts: PropTypes.arrayOf(PropTypes.object)
+}
+
+export default PostsList;
