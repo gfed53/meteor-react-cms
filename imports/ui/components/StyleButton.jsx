@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 
 export default class StyleButton extends Component {
@@ -22,4 +23,11 @@ export default class StyleButton extends Component {
       </button>
     );
   }
+}
+
+StyleButton.propTypes = {
+  active: PropTypes.bool,
+  label: PropTypes.string,
+  onToggle: PropTypes.func,
+  style: PropTypes.string
 }

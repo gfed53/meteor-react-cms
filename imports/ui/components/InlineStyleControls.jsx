@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 
 import StyleButton from './StyleButton';
@@ -25,3 +26,8 @@ export const InlineStyleControls = (props) => {
     </div>
   );
 };
+
+InlineStyleControls.propTypes = {
+  editorState: PropTypes.object,
+  onToggle: PropTypes.func
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { EditorState, SelectionState, RichUtils, Modifier, convertToRaw, convertFromRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 
@@ -226,3 +227,9 @@ function moveSelectionToEnd(editorState) {
 
   return EditorState.acceptSelection(editorState, selection);
 };
+
+MyEditor.propTypes = {
+  onSave: PropTypes.func,
+  onCancel: PropTypes.func,
+  draft_content: PropTypes.object
+}

@@ -37,7 +37,7 @@ class PostEdit extends Component {
 }
 
 PostEdit.propTypes = {
-  post_id: PropTypes.number,
+  post_id: PropTypes.string,
   onSave: PropTypes.func,
   onClose: PropTypes.func,
   draft_content: PropTypes.object
